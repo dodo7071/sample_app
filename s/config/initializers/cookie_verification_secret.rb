@@ -2,6 +2,6 @@
 
 # Your secret key for verifying the integrity of signed cookies.
 # If you change this key, all old signed cookies will become invalid!
-# Make sure the secret is at least 30 characters and all random,
+# Make sure the secret is at least 30 characters and all random, 
 # no regular words or you'll be exposed to dictionary attacks.
-SampleApp::Application.config.secret_token = '962d2c3fecc8f8ae7f1362f3fc01d44365e9b8152846a3b6cafaee09ce79ba4e7a0bcfe6dad2a8bce138eddce8dec62df9dcbcf209b0907900a6d3f4b77150cc'
+ActionController::Base.cookie_verifier_secret = '42f0709dc8d3ff8bd1ed3d949dd69dfe519397879b6a8958d8381d1682b5d4f0c738e56cd71e171bf9ebc8a7239d32d8c1f7c12efb34cac3dbab465165070d0f';
