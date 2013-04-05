@@ -9,7 +9,7 @@ class StaticPagesController < ApplicationController
   def about
   end
 
-  def about
+  def sign_in
   end
 
 end
