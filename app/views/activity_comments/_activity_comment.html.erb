@@ -1,0 +1,12 @@
+<section>
+
+	<hr>
+	<span class="text">
+		<b><%= activity_comment.text %></b>
+	</span><br>
+  
+	<small>Posted <%= link_to activity_comment.getAuthor(activity_comment.user_id).name, activity_comment.getAuthor(activity_comment.user_id) %> <%= time_ago_in_words(activity_comment.created_at) %> ago.</small><br>
+
+</section>
+
+

@@ -1,5 +1,7 @@
 @import "bootstrap";
 
+
+
 /* mixins, variables, etc. */
 
 $grayMediumLight: #eaeaea;
@@ -19,6 +21,7 @@ html {
 
 body {
   padding-top: 60px;
+  background-image:url('/images/background.png');
 }
 
 section {
@@ -44,7 +47,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 2.8em;
+  font-size: 3.8em;
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
@@ -52,12 +55,15 @@ h1 {
 }
 
 h2 {
-  font-size: 1.7em;
+  font-size: 2.8em;
   letter-spacing: -1px;
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: #999;
+}
+
+h3 {
+  font-size:1.9em;
 }
 
 p {
@@ -67,11 +73,13 @@ p {
 
 /* header */
 
+
 #logo {
   float: left;
   margin-right: 10px;
   font-size: 2em;
-  color: #fffaaa;
+  font-style: oblique;
+  color: black;
   
   letter-spacing: -1px;
   padding-top: 9px;
@@ -80,7 +88,8 @@ p {
 }
 
 #logo:hover {
-  color: #fff;
+  color: #FF0000;
+
   text-decoration: none;
 }
 
@@ -126,6 +135,7 @@ footer ul li {
 }
 
 aside {
+
   section {
     padding: 10px 0;
     border-top: 1px solid $grayLighter;
@@ -158,6 +168,7 @@ aside {
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
+  height: 100%;
   padding: 10px;
   margin-bottom: 15px;
   @include box_sizing;
@@ -193,5 +204,110 @@ input {
       border-bottom: 1px solid $grayLighter;
     }
   }
+}
+
+/* activities */
+
+.activities {
+  list-style: none;
+  margin: 10px 0 0 0;
+
+  li {
+    padding: 10px 0;
+    border-top: 2px solid #e8e8e8;
+  }
+}
+
+#content { 
+  overflow:auto; 
+  width: 600px; 
+} 
+
+#left, #right { 
+  width: 40%; 
+  margin:5px; 
+  padding: 1em;  
+} 
+
+#left  { float:left;  }
+#right { float:right; } 
+
+
+.activity_comments {
+  list-style: none;
+  margin: 10px 0 0 0;
+
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+}
+
+div.comment {
+  border-width:1px;
+  border-style:solid;
+  border-color:blue;
+  }
+
+/* posts */
+
+.posts {
+  list-style: none;
+  margin: 10px 0 0 0;
+
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+}
+.content {
+  display: block;
+}
+.timestamp {
+  color: $grayLight;
+}
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
+  }
+}
+
+div {
+  textarea {
+    height: 42px;
+    margin-bottom: 5px;
+  }
+}
+
+ol.post
+{
+	background-color:#ffefff;
+}
+
+
+.stats {
+  overflow: auto;
+  a {
+    float: left;
+    padding: 0 10px;
+    border-left: 1px solid $grayLighter;
+    color: gray;
+    &:first-child {
+      padding-left: 0;
+      border: 0;
+    }
+    &:hover {
+      text-decoration: none;
+      color: $blue;
+    }
+  }
+  strong {
+    display: block;
+  }
+}
+
+div.btn-group {
+    text-align: center;
 }
 

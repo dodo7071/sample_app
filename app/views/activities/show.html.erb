@@ -1,0 +1,170 @@
+
+<div class="row">
+
+	<aside class="span3">
+
+		<%= image_tag("/images/activity.jpg", :size => "400x300") %>
+	
+		<div class="well">
+
+			<section>	
+				<h4>Joined people(<%= @activity.getParticipantCount %>):</h4>
+
+				<% @participants.each do |i| %>
+					<dd>
+						<%= link_to i.name, i %>
+					</dd>
+				<% end %>
+			</section>
+
+		</div>
+
+
+		<section>	
+			<h4>Similiar activities:</h4>
+
+			<% @similiar.each do |i| %>
+				<dd>
+					<%= link_to i.title, i %>
+				</dd>
+			<% end %>
+		</section>
+		
+
+	</aside>
+
+	<div class="span9">
+	
+		<span class="title">
+			<h3><%= link_to @activity.title, @activity %></h3><br>
+		</span>
+
+				
+		<% if signed_in? %>
+
+			<div class="btn-group-left">	
+
+				<% if @activity.participantCount(current_user,@activity) == 0 %>
+					<%= link_to join_activity_path(@activity.id), :class => 'btn'  do %>
+						<i class="icon-ok icon-black"></i> Join this activity
+					<% end %>
+				<% else %>
+					<%= link_to cancel_activity_path(@activity.id), :class => 'btn'  do %>
+						<i class="icon-ban-circle icon-black"></i> Cancel participation
+					<% end %>
+				<% end %>
+
+
+				<% if current_user?(@activity.user) %>
+
+
+					<%= link_to addFacility_activity_path(@activity.id), :class => 'btn'  do %>
+						<i class="icon-plus"></i> Add facility
+					<% end %>
+
+					<%= link_to edit_activity_path(@activity.id), :class => 'btn'  do %>
+						<i class="icon-pencil"></i> Edit this activity
+					<% end %>
+
+					<%= link_to @activity, :method => :delete, data: { confirm: "You sure?" } , :class => 'btn'  do %>
+						<i class="icon-remove"></i> Delete this activity
+					<% end %>
+
+				<% end %>
+
+			</div>
+
+			<br><br>
+
+		<% else %>
+
+			<%= link_to join_activity_path(@activity.id), :class => 'btn'  do %>
+				<i class="icon-ok icon-black"></i> Join this activity
+			<% end %>
+
+			<br><br>
+
+		<% end %>
+
+		<div class="well">
+
+				<div style="width: 100%;">
+					<div style="float:left; width: 25%">
+						<b>
+							Type:<br>
+							Author:<br>
+							Location:<br>
+							Begin:<br>
+							End:<br>
+							Note:<br>
+						</b>
+
+					</div>
+					<div style="float:left;">
+						<%= @activity.getType %><br>
+						<%= link_to @activity.getAuthor(@activity.user_id).name, @activity.getAuthor(@activity.user_id) %><br>
+						<%= @activity.getLocation %><br>
+						<%= @activity.beg_date %> at <%= @activity.beg_time.strftime('%H:%M') %><br>
+						<%= @activity.end_date %> at <%= @activity.end_time.strftime('%H:%M') %><br>
+						<%= @activity.note %><br>
+
+					</div>
+	
+				</div>
+				<div style="clear:both"></div>
+
+			<span class="timestamp">
+				<br>Created <%= time_ago_in_words(@activity.created_at) %> ago
+				<br>Updated <%= time_ago_in_words(@activity.updated_at) %> ago
+	  		</span>
+
+		</div>
+
+		
+		<div class="well">
+
+			<h4>Facilities (<%= @activity.getFacilitiesCount %>)</h4></br>
+
+			<% @facilities.each do |i| %>
+				<dd>
+					<%= link_to i.title, i %>
+				</dd>
+			<% end %>
+
+		</div>
+
+
+		<div class="well">
+
+			<h4>Comments (<%= @activity.getCommentsCount %>)</h4>
+
+			<ol class="activity_comments">
+				<%= render @activity_comments %>
+			</ol>
+
+			<%= will_paginate @activity_comments %>
+
+		</div>
+
+		<% if signed_in? %>
+
+			<div class="well">
+
+				<%= form_for(@activity_comment) do |f| %>
+					<%= render 'shared/error_messages', object: f.object %>
+					<%= f.text_area :text, placeholder: "Add comment..." %>
+					<%= f.hidden_field :activity_id, :value => @activity.id %>
+					<%= f.submit "Add comment", :class => "btn btn-success btn-small"  do %>
+						<i class="icon-ban-circle icon-black"></i>
+					<% end %>
+				
+				<% end %>
+
+			</div>
+
+		<% end %>
+
+	</div>
+
+</div>
+

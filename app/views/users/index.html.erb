@@ -1,10 +1,65 @@
 <% provide(:title, 'All users') %>
-<h1>All users</h1>
 
-<%= will_paginate %>
 
-<ul class="users">
-  <%= render @users %>
-</ul>
+<div class="row">
 
-<%= will_paginate %>
+	<aside class="span3">
+
+		<section>
+			<p>
+				Follow this people:
+						
+				<% @users.each do |i| %>
+					<dd>
+						<%= link_to i.name, i %>
+					</dd>
+				<% end %>
+						
+		  	</p>
+		</section>
+
+	</aside>
+
+	<div class="span6">
+
+		<h3>Find users</h3>	
+
+		<div class="well">
+
+			<%= form_tag '/find_users', method: :get do %>
+
+				<%= label_tag :name, 'User name' %>
+				<%= text_field_tag :name %>
+				<br><br>
+			
+				<%= label_tag :activity_type_id, 'Favourite activity' %>
+				<%= collection_select(:activity_type_id, nil , ActivityType.all, :id, :name, :prompt => false) %>
+				<br><br>
+
+				<%= label_tag :location_id, 'Location' %>
+				<%= collection_select(:location_id, nil , Location.all, :id, :name, :prompt => false) %>
+				<br><br>
+
+				<div>
+					<%= submit_tag '  Search  ', class: "btn btn-large btn-primary" %>
+				</div>
+			<% end %>
+	
+		</div>
+
+	</div>
+
+	<aside class="span3">
+
+		<section>
+			<p>
+				My followers follow:
+						
+		  	</p>
+		</section>
+
+	</aside>
+
+
+</div>
+

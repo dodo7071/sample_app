@@ -1,0 +1,140 @@
+
+<div class="row">
+
+	<aside class="span3">
+
+		<%= image_tag("/images/gym.jpg", :size => "400x300") %>
+
+		<section>
+			<%= image_tag("/images/gym2.jpg", :size => "400x300") %>
+		</section>
+
+		<section>
+
+			<div class="well">
+
+				<h4>Activity types</h4>
+
+				<% @activityTypes.each do |i| %>
+					<dd>
+						<%= @facility.getType(i.activity_type_id).name %>
+					</dd>
+				<% end %>
+
+			</div>
+
+			<div class="well">
+				<h4>Evaluation: </h4><%=@facility.getEvaluation%>
+			</div>
+		</section>
+
+
+		<section>
+			<h4>Similiar facilities:</h4>
+
+			<% @similiar.each do |i| %>
+				<dd>
+					<%= link_to i.title, i %>
+				</dd>
+			<% end %>
+
+		</section>
+
+		
+		<section>
+
+			<h4>Activities of this facility:</h4>
+
+			<% @activities.each do |i| %>
+				<dd>
+					<%= link_to i.title, i %>
+				</dd>
+			<% end %>
+
+		<section>
+
+
+	</aside>
+
+	<div class="span9">
+
+		<div style="width: 100%;">
+			<div style="float:left; width: 75%">
+				<span class="title">
+					<h3><%= link_to @facility.title, @facility %></h3>
+				</span>
+			</div>
+			<div style="float:right;">
+
+				<%= link_to addToActivity_facility_path(@facility), :class => 'btn'  do %>
+					<i class="icon-plus icon-black"></i> Add to my activity
+				<% end %>
+
+			</div>
+		</div>
+		<div style="clear:both"></div>
+
+		<div class="well">
+
+				<span class="facilityServices">
+					<h4>Services:</h4> <%= @facility.services %>
+				</span>
+
+		  		<span class="facilityAdress">
+					<h4>Adress:</h4> <%= @facility.adress %>
+				</span>
+
+				<span class="facilityLocation">
+					<h4>Location:</h4> <%= @facility.getLocation %> <br><%= @facility.gps %>
+				</span>
+
+		  		<span class="facilityWebpage">
+					<h4>Web page:</h4> <a href="<%= @facility.web_page %>"><%= @facility.web_page %></a>
+				</span>
+
+		  		<span class="facilityEmail">
+					<h4>Email:</h4> <%= @facility.email %>
+				</span>
+
+				<span class="facilityTelephone">
+					<h4>Telephone:</h4> <%= @facility.telephone %>
+				</span>
+
+				<span class="facilityInfo">
+					<h4>Info:</h4> <%= @facility.info %>
+				</span>
+
+		</div>
+
+
+		<div class="well">
+
+			<h3>Evaluations (<%= @facility.getEvaluationsCount %>)</h3></br>
+
+			<ol class="activities">
+				<%= render @evaluations %>
+			</ol>
+
+			<%= will_paginate @evaluations %>
+
+			<hr>
+		</div>
+
+	
+		<div class="well">
+
+			<section>
+				<%= form_for Evaluation.new do |f| %>
+					<%= f.text_area :note, placeholder: "Add comment..." %>
+					Select value					
+					<%= f.select :value, (0..10) %>
+					<%= f.hidden_field :facility_id, :value => @facility.id %>
+					<%= f.submit " Add evaluation ", class: "btn btn-large btn-primary" %>
+				<% end %>
+			</section>
+
+		</div>
+
+	</div>
+
+</div>

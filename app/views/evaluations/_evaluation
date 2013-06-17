@@ -1,0 +1,10 @@
+<div class="well">
+	<p>
+		<%= evaluation.value %>/10<br>
+		<%= evaluation.note %><br>
+		<small>
+			<%= link_to evaluation.getUser.name, evaluation.getUser %>
+			<%= time_ago_in_words(evaluation.created_at) %> ago.
+		</small>
+	</p>
+</div>

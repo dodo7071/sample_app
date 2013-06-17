@@ -1,0 +1,128 @@
+
+<% if @user != current_user %>
+
+	<ul class="nav nav-tabs">
+		<li>
+			<a href="../<%= @user.id %>">General</a>
+		</li>
+
+		<li>
+			<a href="../<%= @user.id %>/info">Profile Info</a>
+		</li>
+
+		<li>
+			<a href="../<%= @user.id %>/following">Following(<%= @user.getFollowedCount %>)</a>
+		</li>
+
+		<li class="active">
+			<a href="../<%= @user.id %>/followers">Followers(<%= @user.getFollowersCount %>)</a>
+		</li>
+	</ul>
+
+	<div class="row">
+			<aside class="span3">
+				<section>
+					<span>
+						<font size="5"><%= link_to @user.name, @user %></font>
+					</span>
+
+					<a href="<%= user_path(@user) %>">
+						<%= image_tag("/images/person.jpg") %>
+					</a>
+				</section>
+
+				<section>
+					<div class="well">
+						Favourite activities:
+		
+						<% @user.myActivities.each do |i| %>
+							<dd>
+								<%= @user.getType(i.activity_type_id).name %>
+							</dd>
+						<% end %>
+		 			 </div>
+				</section>
+
+			</aside>
+
+			<div class="span9">
+
+				<div class="well">
+
+					<% @followers.each do |i| %>
+						<dd>
+							<%= link_to i.name, i %>
+						</dd>
+					<% end %>
+
+				</div>
+
+			</div>
+
+	  	</div>
+
+<% else %>
+
+	<ul class="nav nav-tabs">
+		<li>
+			<a href="../<%= @user.id %>">General</a>
+		</li>
+
+		<li>
+			<a href="../<%= @user.id %>/info">Profile Info</a>
+		</li>
+
+		<li>
+			<a href="../<%= @user.id %>/following">Following(<%= @user.getFollowedCount %>)</a>
+		</li>
+
+		<li class="active">
+			<a href="../<%= @user.id %>/followers">Followers(<%= @user.getFollowersCount %>)</a>
+		</li>
+	</ul>
+
+	<div class="row">
+			<aside class="span3">
+				<section>
+					<span>
+						<font size="5"><%= link_to @user.name, @user %></font>
+					</span>
+
+					<a href="<%= user_path(@user) %>">
+						<%= image_tag("/images/person.jpg") %>
+					</a>
+				</section>
+
+				<section>
+					<div class="well">
+						Favourite activities:
+		
+						<% @user.myActivities.each do |i| %>
+							<dd>
+								<%= @user.getType(i.activity_type_id).name %><button class="close">&times;</button>
+							</dd>
+						<% end %>
+
+						<br><%= link_to "Add favourite activity", info_user_path, :method => "get" %>
+		 			 </div>
+					<hr>
+				</section>
+
+			</aside>
+
+			<div class="span9">
+			
+				<div class="well">
+
+					<% @followers.each do |i| %>
+						<dd>
+							<%= link_to i.name, i %>
+						</dd>
+					<% end %>
+
+				</div>
+
+			</div>
+
+	  	</div>	
+<% end %>

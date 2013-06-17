@@ -1,0 +1,35 @@
+<% provide(:title, 'My participations') %>
+
+<div class="row">
+		<aside class="span4">
+			<section>
+
+				<div class="well">
+
+					<h4>Recommended activities:</h4>
+
+					<% @recommended.each do |i| %>
+						<dd>
+							<%= link_to i.title, i %>
+						</dd>
+					<% end %>
+
+				</div>
+			</section>
+		</aside>
+
+
+		<div class="span8">
+
+			<h3>My participations(<%= @activities.count %>)</h3>
+
+			<hr>
+
+			<%= render @activities %>
+
+		</div>
+
+</div>
+
+
+

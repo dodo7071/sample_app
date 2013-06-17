@@ -14,3 +14,21 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree 
+//= require jquery-ui
+//= require bootstrap-datepicker
+
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.es
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.fr
+
+$(document).on("focus", "[data-behaviour~='datepicker']", function(e){
+    $(this).datepicker({"format": "yyyy-mm-dd", "weekStart": 1, "autoclose": true});
+});
+
+$(function(e) {
+    $('#timepicker3').timepicker({
+      pickDate: false
+    });
+  });
+
+

@@ -1,0 +1,65 @@
+	
+<a href="<%= activity_path(activity) %>">
+
+		<font color="black">
+			<div class="well" style="width:100%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
+
+			  	<span class="title"> 
+					<h4><%= activity.title %></h4>
+					<big><%= time_ago_in_words(activity.beg_date) %> <%= activity.getParticipantCount %> joined people</big>
+				</span>
+
+
+				<p>
+
+					<div style="width: 100%;">
+						<div style="float: left; width: 13%">
+							<span class="activity_type_id">
+								<b>Type:</b> 
+							</span></br>
+
+							<span class="location_id">
+								<b>Location:</b>
+							</span>
+						</div>
+
+						<div style="float: left; width: 37%">
+							<span class="activity_type_id">
+								<%= activity.getType %>
+							</span></br>
+
+							<span class="location_id">
+								<%= activity.getLocation %>
+							</span>
+						</div>
+
+						<div style="float: left; width: 10%">
+							<span class="beg">
+								<b>Begin:</b>
+							</span></br>
+				
+							<span class="end">
+								<b>End:</b>
+							</span>
+						</div>
+
+						<div style="float: left;">
+							<span class="beg">
+								<%= activity.end_date %> at <%= activity.beg_time.strftime('%H:%M') %>
+							</span></br>
+				
+							<span class="end">
+								<%= activity.end_date %> at <%= activity.end_time.strftime('%H:%M') %>
+							</span>
+						</div>
+					
+					</div>
+					<div style="clear:both"></div>
+
+				</p>
+
+
+			</div>
+		</font>
+
+</a>

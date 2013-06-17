@@ -1,0 +1,5 @@
+<%= form_for(@evaluation) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+    <%= f.text_area :text, placeholder: "Add comment..." %>
+	<%= f.submit " Add ", class: "btn btn-large btn-primary" %>
+<% end %>

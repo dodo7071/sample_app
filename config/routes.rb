@@ -1,16 +1,61 @@
 SampleApp::Application.routes.draw do
-  resources :users
-  resources :sessions, only: [:new, :create, :destroy]
+  get "participations/new"
 
-  root to: 'static_pages#home'
+	resources :users do
+		member do
+			get :following, :followers, :info, :deletefavourite, :follow, :unfollow
+		end
+	end
 
-  match '/signup',  to: 'users#new'
-  match '/signin',  to: 'sessions#new'
-  match '/signout', to: 'sessions#destroy', via: :delete
+	resources :sessions, only: [:new, :create, :destroy]
 
-  match '/help',    to: 'static_pages#help'
-  match '/about',   to: 'static_pages#about'
-  match '/contact', to: 'static_pages#contact'
+	resources :posts, only: [:create, :destroy]
+	resources :post_comments, only: [:create, :destroy]
+
+	resources :followings, only: [:create, :destroy]
+
+	resources :activities do
+		member do
+			get :addFacility, :removeFacility, :join, :cancel, :comment
+		end
+	end
+
+	resources :participations
+
+	resources :facilities do
+    	member do
+     		 get :evaluate, :addToActivity, :set
+		end
+	end
+
+	resources :activity_comments, only: [:create, :destroy]
+
+	resources :activity_facilities, only: [:create, :destroy]
+
+	resources :evaluations, only: [:create, :destroy]
+
+
+
+	root to: 'static_pages#home'
+
+	match '/find_activity', to: 'activities#find', via: :get
+	match '/find_activities', to: 'activities#find_activities', via: :get
+
+	match '/find_users', to: 'users#find_users', via: :get	
+
+	match '/create_activity', to: 'activities#new'
+	match '/my_activity', to: 'activities#my'
+
+	match '/find_facilities', to: 'facilities#find_facilities', via: :get
+
+	match '/signup',  to: 'users#new'
+	match '/signin',  to: 'sessions#new'
+	match '/signout', to: 'sessions#destroy', via: :delete
+
+	match '/my_participations', to: 'activities#participations'
+
+	match '/about',   to: 'static_pages#about'
+	match '/contact', to: 'static_pages#contact'
 
 
   # The priority is based upon order of creation:

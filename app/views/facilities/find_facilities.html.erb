@@ -1,0 +1,98 @@
+<% provide(:title, 'Find facilities') %>
+
+<div class="row">
+
+		<%= form_tag '/find_facilities', method: :get do %>
+
+			<div class="well">
+
+
+				<div style="width: 100%;">
+						
+					<div style="float: left; width: 43%">
+						<%= label_tag :location_id, 'Location' %>
+					</div>
+
+
+					<div style="float: left; width: 43%">
+						<%= label_tag :activity_type_id, 'Activity type' %>
+					</div>
+
+				</div>
+				<div style="clear:both"></div>
+
+
+				<div style="width: 100%;">
+						
+					<div style="float: left; width: 43%">
+						<%= collection_select(:location_id, nil , Location.order('name'), :id, :name, {:selected => @location}) %>
+					</div>
+
+					<div style="float: left; width: 43%">
+						<%= collection_select(:activity_type_id, nil , ActivityType.all, :id, :name, {:selected => @type}) %>
+					</div>
+					
+					<div style="float: right;">
+						<%= submit_tag '  Search  ', class: "btn btn-large btn-primary" %>
+					</div>
+
+				</div>
+				<div style="clear:both"></div>
+
+			</div>
+
+		<% end %>
+
+		<%  if signed_in? %>
+
+			<div class="span6">
+
+				<h3>Found facilities</h3>
+
+				<hr>
+
+				<%= will_paginate(@facility) %>
+				<%= render @facility %>
+				<%= will_paginate(@facility) %>
+
+			</div>
+
+			<aside class="span3">
+				<section>
+
+					<% if signed_in? %>
+
+						<div class="well">
+
+							<h4>My favourite facilities:</h4>
+
+							<% @favourite.each do |i| %>
+								<dd>
+									<%= link_to i.title, i %>
+								</dd>
+							<% end %>
+
+						</div>
+
+					<% end %>				
+
+				</section>
+			</aside>
+
+		<% else %>
+
+			<div class="span12">
+
+				<h3>Found facilities</h3>
+
+				<hr>
+
+				<%= will_paginate(@facility) %>
+				<%= render @facility %>
+				<%= will_paginate(@facility) %>
+
+			</div>
+
+		<% end %>
+
+</div>

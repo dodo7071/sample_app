@@ -1,12 +1,273 @@
-<div class="center hero-unit">
-  <h1>Welcome to the Activity Finder</h1>
 
-  <h2>
-    This is the right place to find activities to enjoy them with other people
-  </h2>
+<% if signed_in? %>
 
-  <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
-</div>
+
+	<div class="btn-group">
+
+		<%= link_to my_activity_path, :class => 'btn'  do %>
+			<i class="icon-star icon-black"></i> My activities
+		<% end %>
+
+		<%= link_to my_participations_path, :class => 'btn'  do %>
+			<i class="icon-tags icon-black"></i> My participations
+		<% end %>
+
+		<%= link_to create_activity_path, :class => 'btn'  do %>
+			<i class="icon-plus icon-black"></i> Create activity
+		<% end %>
+
+		<%= link_to find_activity_path, :class => 'btn'  do %>
+			<i class="icon-search icon-black"></i> Find activities
+		<% end %>
+
+		<%= link_to facilities_path, :class => 'btn'  do %>
+			<i class="icon-search icon-black"></i> Find facilities
+		<% end %>
+
+		<%= link_to users_path, :class => 'btn'  do %>
+			<i class="icon-search icon-black"></i> Find users
+		<% end %>
+
+		<%= link_to following_user_path(current_user), :class => 'btn'  do %>
+			<i class="icon-eye-open icon-black"></i> Who I follow
+		<% end %>
+
+	</div>
+	
+
+	<br><br>
+
+	<div class="row">
+		<aside class="span3">
+			<section>
+				<%= render 'shared/user_info' %>
+			</section>
+
+			<section>
+					<p>
+						Will participate:
+						
+						<% @activities.each do |i| %>
+							<dd>
+								<%= link_to i.title, i %>
+							</dd>
+						<% end %>
+						
+		  			</p>
+				</section>
+
+			<section>
+				<p>
+					My activities:
+		
+					<% @my_activities.each do |i| %>
+						<dd>
+							<%= link_to i.title, i %>
+						</dd>
+					<% end %>
+	  			</p>
+			</section>
+
+		</aside>
+
+		<div class="span6">
+
+			<%= form_for Post.new do |f| %>
+
+				<%= render 'shared/error_messages', object: f.object %>
+				
+				<div class="field">
+					<%= f.text_area :content, placeholder: "Write a post..." %>
+					<%= f.hidden_field :target_id, :value => current_user.id %>
+				</div>
+
+				<%= f.submit " Add post ", class: "btn btn-small btn-primary" %>
+
+			<% end %>
+
+			<hr>
+
+			<ol class="posts">
+				<%= render @posts %>
+			</ol>
+
+
+			<td class="post">
+
+		</div>
+
+		<aside class="span3">
+			<section>
+				<p>
+					Follow this people:
+		
+					<% @follow.each do |i| %>
+						<dd>
+							<%= link_to i.name, i %>
+						</dd>
+					<% end %>
+	  			</p>
+			</section>
+			
+			<section>
+				<p>
+					Recommended facilities:
+		
+					<% @facilities.each do |i| %>
+						<dd>
+							<%= link_to i.title, i %>
+						</dd>
+					<% end %>
+	  			</p>
+			</section>
+
+		</aside>
+
+  	</div>
+
+<% else %>
+
+	<div class="row">	
+
+		<%= image_tag("/images/logo.png") %>
+		<hr>
+
+		<aside class="span4">
+
+			<div class="well">
+				<center>
+
+					<%= link_to new_user_path, :class => 'btn btn-primary btn-large'  do %>
+						<i class="icon-white icon-list-alt"></i> <big><b>Register now for free</b></big>
+					<% end %>
+
+					<br><br>
+					<big><%= link_to "Why should I register?", new_user_path %></big>
+
+				</center>
+			</div>
+				
+
+			<div class="well">
+
+				<h4>About Activity finder:</h4>
+
+				Activity finder is the web page which helps people to find sport activities according their interest and choosen location. It includes many sport facilities which can be evaluated and add to activities...</p>
+					
+
+				Look <%= link_to "there", about_path %> for more information.
+			</div>
+
+		</aside>
+
+			<div style="float: right;">
+				<%= link_to about_path, :class => 'btn btn-primary btn-medium'  do %>
+					<i class="icon-white icon-question-sign"></i> <big><b>What is Activity Finder? </b></big>
+				<% end %>
+			</div>
+
+			<div class="span8">
+
+				
+				<h3>Find sport activity</h3>
+				
+				<%= form_tag '/find_activities', method: :get do %>
+
+					<div class="well">
+
+						<div style="width: 100%;">
+						
+							<div style="float: left; width: 39%">
+								<%= label_tag :location_id, 'Location' %>
+							</div>
+
+
+							<div style="float: left; width: 39%">
+								<%= label_tag :activity_type_id, 'Activity type' %>
+							</div>
+
+						</div>
+						<div style="clear:both"></div>
+
+
+						<div style="width: 100%;">
+						
+							<div style="float: left; width: 39%">
+								<%= collection_select(:location_id, nil , Location.order('name'), :id, :name) %>
+							</div>
+
+
+							<div style="float: left; width: 39%">
+								<%= collection_select(:activity_type_id, nil , ActivityType.all, :id, :name,) %>
+							</div>
+					
+							<div style="float: right;">
+								<%= submit_tag 'Find activity', class: "btn btn-large btn-primary" %>
+							</div>
+
+						</div>
+						<div style="clear:both"></div>
+
+					</div>
+
+
+				<% end %>
+
+				<hr>
+
+
+				<h3>Find sport facility</h3>
+
+
+				<%= form_tag '/find_facilities', method: :get do %>
+
+					<div class="well">
+
+
+						<div style="width: 100%;">
+						
+							<div style="float: left; width: 39%">
+								<%= label_tag :location_id, 'Location' %>
+							</div>
+
+
+							<div style="float: left; width: 39%">
+								<%= label_tag :activity_type_id, 'Activity type' %>
+							</div>
+
+						</div>
+						<div style="clear:both"></div>
+
+
+						<div style="width: 100%;">
+						
+							<div style="float: left; width: 39%">
+								<%= collection_select(:location_id, nil , Location.order('name'), :id, :name) %>
+							</div>
+
+							<div style="float: left; width: 39%">
+								<%= collection_select(:activity_type_id, nil , ActivityType.all, :id, :name,) %>
+							</div>
+					
+							<div style="float: right;">
+								<%= submit_tag 'Find facility', class: "btn btn-large btn-primary" %>
+							</div>
+
+						</div>
+						<div style="clear:both"></div>
+
+					</div>
+
+
+				<% end %>
+
+			</div>
+
+  	</div>
+	
+<% end %> 
+
+  
 
 
 

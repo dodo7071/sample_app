@@ -1,12 +1,249 @@
 <% provide(:title, @user.name) %>
-<div class="row">
-  <aside class="span4">
-    <section>
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
-    </section>
-  </aside>
-</div>
+
+<% if @user != current_user %>
+
+	<ul class="nav nav-tabs">
+		<li class="active">
+			<a href="<%= @user.id %>">General</a>
+		</li>
+
+		<li>
+			<a href="<%= @user.id %>/info">Profile Info</a>
+		</li>
+
+		<li>
+			<a href="<%= @user.id %>/following">Following(<%= @user.getFollowedCount %>)</a>
+		</li>
+
+		<li>
+			<a href="<%= @user.id %>/followers">Followers(<%= @user.getFollowersCount %>)</a>
+		</li>
+	</ul>
+
+	<div class="row">
+			<aside class="span3">
+				<section>
+					<span>
+						<font size="5"><%= link_to @user.name, @user %></font>
+					</span>
+
+					<a href="<%= user_path(@user) %>">
+						<%= image_tag("/images/person.jpg") %>
+					</a>
+				</section>
+
+				<section>
+					<div class="well">
+						Favourite activities:
+		
+						<% @user.myActivities.each do |i| %>
+							<dd>
+								<%= @user.getType(i.activity_type_id).name %>
+							</dd>
+						<% end %>
+		 			 </div>
+				</section>
+
+			</aside>
+
+			<div class="span6">
+
+				<div style="width: 100%;">
+					<div style="float:left; width: 70%">
+						<%= render 'shared/stats' %>
+					</div>
+
+					<% if signed_in? %>
+
+						<div style="float:right;">
+							<% if current_user.followingsCount(@user) == 0 %>
+								<%= link_to follow_user_path, :class => 'btn'  do %>
+									<i class="icon-heart icon-black"></i> Follow
+								<% end %>
+
+							<% else %>
+								<%= link_to unfollow_user_path, :class => 'btn'  do %>
+									<i class="icon-ban-circle icon-black"></i> Unfollow
+								<% end %>
+							<% end %>
+
+						</div>
+
+					<% end %>
+
+				</div>
+				<div style="clear:both"></div>
+
+				<hr>
+				
+				<% if signed_in? %>
+
+					<%= form_for Post.new do |f| %>
+
+						<%= render 'shared/error_messages', object: f.object %>
+				
+						<div class="field">
+							<%= f.text_area :content, placeholder: "Write a post" %>
+							<%= f.hidden_field :target_id, :value => @user.id %>
+						</div>
+
+						<%= f.submit " Add post ", class: "btn btn-small btn-primary" %>
+
+					<% end %>
+
+					<hr>
+
+				<% end %>
+
+				<ol class="posts">
+					<%= render @posts %>
+				</ol>
+
+			</div>
+
+			<aside class="span3">
+				<section>
+					<p>
+						Will participate:
+						
+						<% @activities.each do |i| %>
+							<dd>
+								<%= link_to i.title, i %>
+							</dd>
+						<% end %>
+						
+		  			</p>
+				</section>				
+
+				<section>
+					<p>
+						Activities:
+		
+						<% @user.getActivities.each do |i| %>
+							<dd>
+								<%= link_to i.title, i %>
+							</dd>
+						<% end %>
+		  			</p>
+				</section>
+			</aside>
+
+	  	</div>
+
+<% else %>
+
+	<ul class="nav nav-tabs">
+		<li class="active">
+			<a href="<%= @user.id %>">General</a>
+		</li>
+
+		<li>
+			<a href="<%= @user.id %>/info">Profile Info</a>
+		</li>
+
+		<li>
+			<a href="<%= @user.id %>/following">Following(<%= @user.getFollowedCount %>)</a>
+		</li>
+
+		<li>
+			<a href="<%= @user.id %>/followers">Followers(<%= @user.getFollowersCount %>)</a>
+		</li>
+	</ul>
+
+	<div class="row">
+			<aside class="span3">
+				<section>
+					<span>
+						<font size="5"><%= link_to @user.name, @user %></font>
+					</span>
+
+					<a href="<%= user_path(@user) %>">
+						<%= image_tag("/images/person.jpg") %>
+					</a>
+				</section>
+
+				<section>
+					<div class="well">
+						Favourite activities:
+		
+						<% @user.myActivities.each do |i| %>
+							<dd>
+								<%= @user.getType(i.activity_type_id).name %><button class="close">&times;</button>
+							</dd>
+						<% end %>
+
+						<br><%= link_to "Add favourite activity", info_user_path, :method => "get" %>
+		 			 </div>
+					<hr>
+				</section>
+
+			</aside>
+
+			<div class="span6">
+
+				<div style="width: 100%;">
+					<div style="float:left; width: 65%">
+						<%= render 'shared/stats' %>
+					</div>
+
+					<div style="float:right;">
+						<%= link_to edit_user_path(current_user), :class => 'btn'  do %>
+							<i class="icon-wrench icon-black"></i> Acount settings
+						<% end %>
+					</div>
+				</div>
+				<div style="clear:both"></div>
+
+				<hr>
+
+				<%= form_for Post.new do |f| %>
+
+					<%= render 'shared/error_messages', object: f.object %>
+				
+					<div class="field">
+						<%= f.text_area :content, placeholder: "Write a post" %>
+						<%= f.hidden_field :target_id, :value => @user.id %>
+					</div>
+
+					<%= f.submit " Add post ", class: "btn btn-small btn-primary" %>
+
+				<% end %>
+
+				<hr>
+
+				<ol class="posts">
+					<%= render @posts %>
+				</ol>
+
+			</div>
+
+			<aside class="span3">
+				<section>
+					<p>
+						My participations:
+						
+						<% @activities.each do |i| %>
+							<dd>
+								<%= link_to i.title, i %>
+							</dd>
+						<% end %>
+						
+		  			</p>
+				</section>				
+
+				<section>
+					<p>
+						My activities:
+		
+						<% @user.getActivities.each do |i| %>
+							<dd>
+								<%= link_to i.title, i %>
+							</dd>
+						<% end %>
+		  			</p>
+				</section>
+			</aside>
+
+	  	</div>	
+<% end %>			
 

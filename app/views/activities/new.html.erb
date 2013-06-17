@@ -1,0 +1,84 @@
+<% provide(:title, 'Create Activity') %>
+
+
+<div class="row">
+
+	<div class="span10 offset1">
+
+		<h3>Create your own activity</h3>
+
+		<hr>
+
+		<div class="well">
+
+			<%= form_for(@activity) do |f| %>
+
+				<%= render 'shared/error_messages', object: f.object %>
+
+				<div class="well">
+
+					<%= f.label 'Activity Title'%>
+					<%= f.text_field :title %>
+
+				</div>
+
+
+				<div class="well">
+
+					<div style="width: 100%;">
+						<div style="float: left; width: 22%">
+							<%= f.label 'Begin date'%>
+							<%= f.text_field :beg_date, 'data-behaviour' => 'datepicker' %>
+						</div>
+
+						<div style="float: left; width: 22%">
+							<%= f.label 'Begin time'%>
+							<%= f.text_field :beg_time, 'data-behaviour' => 'datetimepicker' %>
+						</div>
+
+						<div style="float: right; width: 22%">
+							<%= f.label 'End time'%>
+							<%= f.text_field :end_time, 'data-behaviour' => 'datetimepicker' %>
+						</div>
+				
+						<div style="float: right; width: 22%">
+							<%= f.label 'End date'%>
+							<%= f.text_field :end_date, 'data-behaviour' => 'datepicker' %>
+						</div>
+					
+					</div>
+					<div style="clear:both"></div>
+
+				</div>
+
+
+				<div class="well">
+
+					<div style="width: 100%;">
+						<div style="float: left; width: 46%">
+							<%= f.label 'Location' %><%= f.collection_select :location_id, Location.all, :id, :name %>
+						</div>
+
+						<div style="float: right; width: 46%">
+							<%= f.label :activity_type_id %><%= f.collection_select :activity_type_id, ActivityType.all, :id, :name %>
+						</div>
+					
+					</div>
+					<div style="clear:both"></div>
+
+				</div>
+
+				
+				<div class="well">
+
+					<%= f.label :activity_note %>
+					<%= f.text_field :note %>
+
+				</div>
+
+				<%= f.submit "Create Activity", class: "btn btn-normal btn-primary" %>
+
+			<% end %>
+		</div>
+	</div>
+</div>

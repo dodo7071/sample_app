@@ -1,25 +1,73 @@
 <% provide(:title, 'Sign up') %>
-<h1>Sign up</h1>
+
 
 <div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@user) do |f| %>
 
-	  <%= render 'shared/error_messages' %>
+	<div class="span7">
 
-      <%= f.label :name %>
-      <%= f.text_field :name %>
 
-      <%= f.label :email %>
-      <%= f.text_field :email %>
+		<h3>Registration</h3>
+		<hr>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
+		<div class="well">
 
-      <%= f.label :password_confirmation, "Confirm your password" %>
-      <%= f.password_field :password_confirmation %>
+			<%= form_for(@user) do |f| %>
 
-      <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
-    <% end %>
-  </div>
+				<%= render 'shared/error_messages', object: f.object %>
+
+				<%= f.label :name %>
+				<%= f.text_field :name %>
+
+				<%= f.label :birth_date, "Birth date" %>
+				<%= f.text_field :birth_date, 'data-behaviour' => 'datepicker' %>
+
+				<%= f.label :email %>
+				<%= f.text_field :email %>
+
+				<%= f.label :contact %>
+				<%= f.text_field :contact %>
+
+				<%= f.label 'Location' %>
+				<%= f.collection_select :location_id, Location.order("name"), :id, :name %>
+
+				<%= f.label :password %>
+				<%= f.password_field :password %>
+
+				<%= f.label :password_confirmation, "Confirm your password" %>
+				<%= f.password_field :password_confirmation %>
+
+				<%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
+
+			<% end %>
+
+		</div>
+
+	</div>
+
+	<aside class="span4 offset1">
+		
+		<div class="well">
+			<big><%= link_to "What is Activity finder?", about_path %></big>
+		</div>
+		
+		<div class="well">
+			<h4>Registration:</h4>
+			<hr>
+
+			<dd>
+				<li>create new activities</li>
+				<li>join to activities</li>
+				<li>add comments to activities</li>
+				<li>evaluate sport facilities</li>
+				<li>follow people</li>
+				<li>read and comment users' posts</li>
+				<li>add own post</li>
+				<li>see new activities of your followers</li>
+				<li>add sport facilities to favourite list</li>
+				
+			</dd>
+		</div>
+
+	</aside>
+
 </div>

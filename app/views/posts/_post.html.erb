@@ -1,0 +1,45 @@
+<div class="well well-small">
+	<span class="author"><%= link_to post.getUser.name, post.getUser %>
+	
+		<% if post.target_id != post.user.id %>
+			> <%= link_to post.getTarget.name, post.getTarget %>
+		<% end %>
+	</span>
+	
+	<% if post.content[0] == '#' %>
+		<span class="content">Created <%= link_to post.getActivity.title, post.getActivity %></span>
+	<% else %>
+		<span class="content"><%= post.content %></span>
+	<% end %>	
+
+	<span class="timestamp">
+  		<%= time_ago_in_words(post.created_at) %> ago.
+	</span>
+
+
+	<% post.getComments.each do |i| %>
+		<dd>
+			<hr>
+			<%= i.content %><br>
+			<small><%= link_to i.getUser.name, i.getUser %> <%= time_ago_in_words(i.created_at) %> ago </small>
+		</dd>
+	<% end %>
+
+	<hr>
+
+	<%= form_for PostComment.new do |f| %>
+
+		<%= render 'shared/error_messages', object: f.object %>
+				
+			<div class="field">
+				<%= f.text_area :content, placeholder: "Write a comment..." %>
+				<%= f.hidden_field :post_id, :value => post.id %>
+			</div>
+
+			<%= f.submit " Add comment ", class: "btn btn-small btn-small" %>
+
+		<% end %>
+	
+
+</div>
+

@@ -1,0 +1,12 @@
+<%= form_for(@activity) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+	<h2>Insert new activity parameters</h2>
+    <%= f.text_area :note, placeholder: "Start date..." %>
+	<%= f.text_area :note, placeholder: "End date..." %>
+	<%= f.text_area :note, placeholder: "Start time..." %>
+	<%= f.text_area :note, placeholder: "End time..." %>
+	<%= f.text_area :note, placeholder: "Activity node..." %>
+  </div>
+  <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+<% end %>

@@ -1,0 +1,41 @@
+<% provide(:title, "Find Activity") %>
+
+
+<div class="row">
+	<div class="span8 offset2">
+
+		<h3>Find activity</h3>
+
+		<hr>
+
+		<div class="well">
+
+			<%= form_tag '/find_activities', method: :get do %>
+
+				<div class="well">
+
+					<div style="width: 100%;">
+						<div style="float: left; width: 46%">
+							<%= label_tag :location_id, 'Location' %><%= collection_select(:location_id, nil , Location.all, :id, :name) %>
+						</div>
+
+						<div style="float: right; width: 46%">
+							<%= label_tag :activity_type_id, 'Activity type' %><%= collection_select(:activity_type_id, nil , ActivityType.all, :id, :name,) %>
+						</div>
+					
+					</div>
+					<div style="clear:both"></div>
+
+				</div>
+
+
+
+				<%= submit_tag '  Search  ', class: "btn btn-large btn-primary" %>
+
+
+			<% end %>
+
+		</div>
+
+	</div>
+</div>
