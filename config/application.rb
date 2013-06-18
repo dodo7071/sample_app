@@ -64,5 +64,8 @@ module SampleApp
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+	config.threadsafe! unless $rails_rake_task
+	config.dependency_loading = true
   end
 end
