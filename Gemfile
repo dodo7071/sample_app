@@ -14,6 +14,8 @@ gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
                               :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
 gem "bootstrap-timepicker-rails", "~> 0.1.3"
 
+gem "seed_dump", "~> 0.5.3"
+
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
