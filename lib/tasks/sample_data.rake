@@ -1218,7 +1218,7 @@ ActivityType.create([
   { :name => "Bowling, kolky" },
   { :name => "Futbal" },
   { :name => "Golf" },
-  { :name => "Hokej, korčulovanie" },
+  { :name => "Hokej, korculovanie" },
   { :name => "Jazdectvo" },
   { :name => "Lyžovanie" },
   { :name => "Motošport" },
