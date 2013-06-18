@@ -1,3 +1,5 @@
+# ruby encoding: utf-8
+
 namespace :db do
 	desc "Fill database with sample data"
 
@@ -1218,7 +1220,7 @@ ActivityType.create([
   { :name => "Bowling, kolky" },
   { :name => "Futbal" },
   { :name => "Golf" },
-  { :name => "Hokej, korculovanie" },
+  { :name => "Hokej, korčuľovanie" },
   { :name => "Jazdectvo" },
   { :name => "Lyžovanie" },
   { :name => "Motošport" },
