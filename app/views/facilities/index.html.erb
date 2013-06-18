@@ -4,31 +4,10 @@
 <% provide(:title, 'My participations') %>
 
 <div class="row">
-		<aside class="span3">
-			<section>
 
-				<% if signed_in? %>
+		<div class="span8">
 
-					<div class="well">
-
-						<h4>My favourite facilities:</h4>
-
-						<% @favourite.each do |i| %>
-							<dd>
-								<%= link_to i.title, i %>
-							</dd>
-						<% end %>
-
-					</div>
-				<% end %>
-
-			</section>
-		</aside>
-
-
-		<div class="span6">
-
-			<h3>Find sport facility</h3>
+			<h3>Find sport facilities</h3>
 
 			<hr>
 
@@ -36,34 +15,32 @@
 
 				<%= form_tag '/find_facilities', method: :get do %>
 			
-					<%= label_tag :activity_type_id, 'Activity type' %>
-					<%= collection_select(:activity_type_id, nil , ActivityType.all, :id, :name, :prompt => false) %>
+					<%= label_tag :location_id, 'Location' %>
+					<%= collection_select(:location_id, nil , Location.order("name"), :id, :name, :prompt => false) %>
 					<br><br>
 
-
-					<%= label_tag :location_id, 'Location' %>
-					<%= collection_select(:location_id, nil , Location.all, :id, :name, :prompt => false) %>
+					<%= label_tag :activity_type_id, 'Activity type' %>
+					<%= collection_select(:activity_type_id, nil , ActivityType.all, :id, :name, :prompt => false) %>
 					<br><br>			
 
 					<div>
-						<%= submit_tag '  Search  ', class: "btn btn-large btn-primary" %>
+						<%= submit_tag 'Find facility', class: "btn btn-large btn-primary" %>
 					</div>
 				<% end %>
 
 			</div>
 
-
 		</div>
 
 
-		<aside class="span3">
+		<aside class="span4">
 			<section>
 
 				<% if signed_in? %>
 
 					<div class="well">
 
-						<h4>Recommended facilities:</h4>
+						<h4>Facilities close to you:</h4>
 
 						<% @recommended.each do |i| %>
 							<dd>

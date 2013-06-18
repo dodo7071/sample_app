@@ -1,22 +1,30 @@
 <div class="row">
 
 	<aside class="span4">
-
 		<section>
 
-			<div class="well">
 				<h4>Followers' activities:</h4>
 
 				<% @foll_act.each do |i| %>
-					<dd>
-						<%= link_to i.title, i %>
-					</dd>
-				<% end %>				
 
-			</div>
+					<a href="<%= activity_path(i) %>">
+
+						<font color="black">
+							<div class="well" style="width:80%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
+
+								<%= time_ago_in_words(i.beg_date) %><br>
+								<%= i.getParticipantCount %> joined people<br>
+								<%= i.getType %><br>
+								<%= i.getLocation %>
+
+							</div>
+						</font>
+
+					</a>
+
+				<% end %>			
 
 		</section>
-	
 	</aside>
 
 

@@ -2,9 +2,9 @@
 
 
 <div class="row">
-	<div class="span8 offset2">
+	<div class="span8">
 
-		<h3>Find activity</h3>
+		<h3>Find sport activities</h3>
 
 		<hr>
 
@@ -12,30 +12,50 @@
 
 			<%= form_tag '/find_activities', method: :get do %>
 
-				<div class="well">
+				<%= label_tag :location_id, 'Location' %>
+				<%= collection_select(:location_id, nil , Location.order("name"), :id, :name, :prompt => false) %>
+				<br><br>
 
-					<div style="width: 100%;">
-						<div style="float: left; width: 46%">
-							<%= label_tag :location_id, 'Location' %><%= collection_select(:location_id, nil , Location.all, :id, :name) %>
-						</div>
+				<%= label_tag :activity_type_id, 'Activity type' %>
+				<%= collection_select(:activity_type_id, nil , ActivityType.all, :id, :name, :prompt => false) %>
+				<br><br>			
 
-						<div style="float: right; width: 46%">
-							<%= label_tag :activity_type_id, 'Activity type' %><%= collection_select(:activity_type_id, nil , ActivityType.all, :id, :name,) %>
-						</div>
-					
-					</div>
-					<div style="clear:both"></div>
-
+				<div>
+					<%= submit_tag 'Find activity', class: "btn btn-large btn-primary" %>
 				</div>
-
-
-
-				<%= submit_tag '  Search  ', class: "btn btn-large btn-primary" %>
-
 
 			<% end %>
 
 		</div>
 
 	</div>
+
+	<aside class="span4">
+		<section>
+
+			<h4>Try also this activities:</h4>
+
+			<% @recommended.each do |i| %>
+
+					<a href="<%= activity_path(i) %>">
+
+						<font color="black">
+							<div class="well" style="width:80%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
+									
+								<%= i.getType %>, <%= i.getLocation %><br>
+								<%= i.beg_date %> (<%= time_ago_in_words(i.beg_date) %>)<br>
+								<%= i.getParticipantCount %> joined people<br>
+								
+
+							</div>
+						</font>
+
+					</a>
+
+				<% end %>	
+
+		</section>
+	</aside>
+
+
 </div>

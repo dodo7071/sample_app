@@ -33,15 +33,15 @@
 				</section>
 
 				<section>
-					<div class="well">
-						Favourite activities:
+					<p>
+						Activities:
 		
-						<% @user.myActivities.each do |i| %>
+						<% @my_activities.each do |i| %>
 							<dd>
-								<%= @user.getType(i.activity_type_id).name %>
+								<%= link_to i.title, i %>
 							</dd>
 						<% end %>
-		 			 </div>
+		  			</p>
 				</section>
 
 			</aside>
@@ -102,6 +102,21 @@
 			</div>
 
 			<aside class="span3">
+				
+				<section>
+					<div class="well">
+						<h4>Favourite activities:</h4>
+		
+						<% @user.myActivities.each do |i| %>
+							<dd>
+								<li>
+									<%= @user.getType(i.activity_type_id).name %>
+								</li>
+							</dd>
+						<% end %>
+		 			 </div>
+				</section>
+
 				<section>
 					<p>
 						Will participate:
@@ -115,17 +130,7 @@
 		  			</p>
 				</section>				
 
-				<section>
-					<p>
-						Activities:
-		
-						<% @user.getActivities.each do |i| %>
-							<dd>
-								<%= link_to i.title, i %>
-							</dd>
-						<% end %>
-		  			</p>
-				</section>
+				
 			</aside>
 
 	  	</div>

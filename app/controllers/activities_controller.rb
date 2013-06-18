@@ -21,13 +21,13 @@ class ActivitiesController < ApplicationController
 	def my
 		@activities = Activity.where("user_id = ?", current_user.id).order("beg_date asc").paginate(page: params[:page])
 		@foll_act = Activity.joins(:user).joins("inner join followings on followings.followed_id = user_id").where("follower_id = ? AND activities.user_id != ?", current_user.id, current_user.id)
-		@foll_act = @foll_act.shuffle[0,50]
+		@foll_act = @foll_act.shuffle[0,6]
 	end
 
 	def participations
 		@activities = Activity.joins(:participations).where("participations.user_id = ? AND beg_date >= ?", current_user.id, Date.today.to_date).order("beg_date asc").paginate(page: params[:page])
 		@recommended = Activity.where("location_id = ?", current_user.location_id)
-		@recommended = @recommended.shuffle[0,50]
+		@recommended = @recommended.shuffle[0,6]
 	end
 
 	def addFacility
@@ -74,6 +74,11 @@ class ActivitiesController < ApplicationController
 		else
 			render 'edit'
 		end
+	end
+
+	def find
+		@recommended = Activity.where("location_id = ?", current_user.location_id)
+		@recommended = @recommended.shuffle[0,3]
 	end
 
 

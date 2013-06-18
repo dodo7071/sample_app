@@ -15,15 +15,14 @@
 
 				<%= render 'shared/error_messages', object: f.object %>
 
-				<div class="well">
+
 
 					<%= f.label 'Activity Title'%>
 					<%= f.text_field :title %>
 
-				</div>
 
 
-				<div class="well">
+		
 
 					<div style="width: 100%;">
 						<div style="float: left; width: 22%">
@@ -49,14 +48,13 @@
 					</div>
 					<div style="clear:both"></div>
 
-				</div>
 
 
-				<div class="well">
+	
 
 					<div style="width: 100%;">
 						<div style="float: left; width: 46%">
-							<%= f.label 'Location' %><%= f.collection_select :location_id, Location.all, :id, :name %>
+							<%= f.label 'Location' %><%= f.collection_select :location_id, Location.order("name"), :id, :name %>
 						</div>
 
 						<div style="float: right; width: 46%">
@@ -66,17 +64,17 @@
 					</div>
 					<div style="clear:both"></div>
 
-				</div>
+		
 
 				
-				<div class="well">
+	
 
 					<%= f.label :activity_note %>
 					<%= f.text_field :note %>
 
-				</div>
+			
 
-				<%= f.submit "Create Activity", class: "btn btn-normal btn-primary" %>
+				<br><br><%= f.submit "Create Activity", class: "btn btn-large btn-primary" %>
 
 			<% end %>
 		</div>

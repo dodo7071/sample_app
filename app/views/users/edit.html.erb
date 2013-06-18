@@ -24,7 +24,7 @@
 			<%= f.text_field :contact %>
 
 			<%= f.label 'Location' %>
-			<%= f.collection_select :location_id, Location.all, :id, :name %>
+			<%= f.collection_select :location_id, Location.order("name"), :id, :name %>
 
 			<%= f.label :password %>
 			<%= f.password_field :password %>

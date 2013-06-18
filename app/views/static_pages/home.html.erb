@@ -1,6 +1,4 @@
-
 <% if signed_in? %>
-
 
 	<div class="btn-group">
 
@@ -44,29 +42,28 @@
 			</section>
 
 			<section>
-					<p>
-						Will participate:
-						
-						<% @activities.each do |i| %>
-							<dd>
-								<%= link_to i.title, i %>
-							</dd>
-						<% end %>
-						
-		  			</p>
-				</section>
 
-			<section>
-				<p>
-					My activities:
+				<h4>Created by me:</h4>
 		
 					<% @my_activities.each do |i| %>
-						<dd>
-							<%= link_to i.title, i %>
-						</dd>
+
+						<a href="<%= activity_path(i) %>">
+
+							<font color="black">
+								<div class="well" style="width:80%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
+
+									<%= i.beg_date %> (<%= time_ago_in_words(i.beg_date) %>)<br>
+									<%= i.getParticipantCount %> joined people<br>
+									<%= i.getType %><br>
+									<%= i.getLocation %>
+
+								</div>
+							</font>
+
 					<% end %>
-	  			</p>
+
 			</section>
+
 
 		</aside>
 
@@ -97,28 +94,27 @@
 		</div>
 
 		<aside class="span3">
-			<section>
-				<p>
-					Follow this people:
-		
-					<% @follow.each do |i| %>
-						<dd>
-							<%= link_to i.name, i %>
-						</dd>
-					<% end %>
-	  			</p>
-			</section>
 			
 			<section>
-				<p>
-					Recommended facilities:
-		
-					<% @facilities.each do |i| %>
-						<dd>
-							<%= link_to i.title, i %>
-						</dd>
+					<h4>My future participations:</h4>
+						
+					<% @activities.each do |i| %>
+
+							<a href="<%= activity_path(i) %>">
+
+								<font color="black">
+									<div class="well" style="width:80%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
+
+										<%= time_ago_in_words(i.beg_date) %><br>
+										<%= i.getParticipantCount %> joined people<br>
+										<%= i.getType %><br>
+										<%= i.getLocation %>
+
+									</div>
+								</font>
+
 					<% end %>
-	  			</p>
+						
 			</section>
 
 		</aside>

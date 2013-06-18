@@ -10,7 +10,7 @@
 #
 
 class User < ActiveRecord::Base
-	attr_accessible :id, :name, :email, :password, :password_confirmation, :birth_date, :contact
+	attr_accessible :id, :name, :email, :password, :password_confirmation, :birth_date, :contact, :location_id
 	has_secure_password
 
 	has_many :activities, dependent: :destroy

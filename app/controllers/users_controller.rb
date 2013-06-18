@@ -8,7 +8,8 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@favourites = UserActivity.where("user_id = ?", @user.id)
 		@posts = Post.where("target_id = ?", @user.id).limit(30)
-		@activities = Activity.joins(:participations).where("participations.user_id = ?", @user.id).order("beg_date desc")
+		@activities = Activity.joins(:participations).where("participations.user_id = ? AND beg_date > ?", @user.id, Date.today.to_date).order("beg_date asc").limit(5)
+		@my_activities = Activity.where("user_id = ? AND beg_date > ?", @user.id, Date.today.to_date).order("beg_date asc")
 	end
 
 	def new
@@ -46,10 +47,8 @@ class UsersController < ApplicationController
 	end
 
 	def index
-
-		@users = User.joins("inner join participations on participations.user_id = users.id").joins("inner join activities on participations.activity_id = activities.id").where("users.id != ?", current_user.id).limit(100)
-
-		@users = @users.shuffle[0,20]
+		@recommended = User.where("location_id = ? AND id != ?", current_user.location_id, current_user.id)
+		@recommended = @recommended.shuffle[0,10]
 	end
 
 	def info
@@ -84,7 +83,7 @@ class UsersController < ApplicationController
 	end
 
 	def find_users
-		@users = User.where("location_id = ? AND name ilike ?", params[:location_id], '%' + params[:name] + '%').joins(:user_activities).where("activity_type_id = ?", params[:activity_type_id])
+		@users = User.where("location_id = ? OR name ilike ?", params[:location_id], '%' + params[:name] + '%').joins(:user_activities).where("activity_type_id = ?", params[:activity_type_id])
 	end
 
 	def destroy

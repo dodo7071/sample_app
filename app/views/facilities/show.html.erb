@@ -10,26 +10,6 @@
 		</section>
 
 		<section>
-
-			<div class="well">
-
-				<h4>Activity types</h4>
-
-				<% @activityTypes.each do |i| %>
-					<dd>
-						<%= @facility.getType(i.activity_type_id).name %>
-					</dd>
-				<% end %>
-
-			</div>
-
-			<div class="well">
-				<h4>Evaluation: </h4><%=@facility.getEvaluation%>
-			</div>
-		</section>
-
-
-		<section>
 			<h4>Similiar facilities:</h4>
 
 			<% @similiar.each do |i| %>
@@ -46,10 +26,21 @@
 			<h4>Activities of this facility:</h4>
 
 			<% @activities.each do |i| %>
-				<dd>
-					<%= link_to i.title, i %>
-				</dd>
-			<% end %>
+
+				<a href="<%= activity_path(i) %>">
+
+					<font color="black">
+						<div class="well" style="width:80%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
+
+							<%= i.beg_date %> (<%= time_ago_in_words(i.beg_date) %>)<br>
+							<%= i.getParticipantCount %> joined people<br>
+							<%= i.getType %><br>
+							<%= i.getLocation %>
+
+						</div>
+					</font>
+
+					<% end %>
 
 		<section>
 
@@ -86,6 +77,16 @@
 
 				<span class="facilityLocation">
 					<h4>Location:</h4> <%= @facility.getLocation %> <br><%= @facility.gps %>
+				</span>
+
+				<span class="facilityType">
+					<h4>Activity types:</h4>
+
+						<% @activityTypes.each do |i| %>
+							<dd>
+								<%= @facility.getType(i.activity_type_id).name %>
+							</dd>
+						<% end %>			
 				</span>
 
 		  		<span class="facilityWebpage">

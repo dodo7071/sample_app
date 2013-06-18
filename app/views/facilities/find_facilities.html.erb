@@ -2,17 +2,17 @@
 
 <div class="row">
 
+	<div class="span12">
+
 		<%= form_tag '/find_facilities', method: :get do %>
 
 			<div class="well">
-
 
 				<div style="width: 100%;">
 						
 					<div style="float: left; width: 43%">
 						<%= label_tag :location_id, 'Location' %>
 					</div>
-
 
 					<div style="float: left; width: 43%">
 						<%= label_tag :activity_type_id, 'Activity type' %>
@@ -33,7 +33,7 @@
 					</div>
 					
 					<div style="float: right;">
-						<%= submit_tag '  Search  ', class: "btn btn-large btn-primary" %>
+						<%= submit_tag 'Find facility', class: "btn btn-large btn-primary" %>
 					</div>
 
 				</div>
@@ -43,56 +43,36 @@
 
 		<% end %>
 
-		<%  if signed_in? %>
+	</div>
 
-			<div class="span6">
+	<% if signed_in? %>
 
-				<h3>Found facilities</h3>
+		<div class="span12">
 
-				<hr>
+			<hr>
+			<h3>Found facilities</h3>
+			<hr>
 
-				<%= will_paginate(@facility) %>
+			<%= will_paginate(@facility) %>
 				<%= render @facility %>
-				<%= will_paginate(@facility) %>
+			<%= will_paginate(@facility) %>
 
-			</div>
+		</div>
 
-			<aside class="span3">
-				<section>
+	<% else %>
 
-					<% if signed_in? %>
+		<div class="span12">
 
-						<div class="well">
+			<hr>
+			<h3>Found facilities</h3>
+			<hr>
 
-							<h4>My favourite facilities:</h4>
-
-							<% @favourite.each do |i| %>
-								<dd>
-									<%= link_to i.title, i %>
-								</dd>
-							<% end %>
-
-						</div>
-
-					<% end %>				
-
-				</section>
-			</aside>
-
-		<% else %>
-
-			<div class="span12">
-
-				<h3>Found facilities</h3>
-
-				<hr>
-
-				<%= will_paginate(@facility) %>
+			<%= will_paginate(@facility) %>
 				<%= render @facility %>
-				<%= will_paginate(@facility) %>
+			<%= will_paginate(@facility) %>
 
-			</div>
-
-		<% end %>
+		</div>
+	
+	<% end %>
 
 </div>

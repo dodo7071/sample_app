@@ -4,7 +4,8 @@ class FacilitiesController < ApplicationController
 
 	def index
 		@favourite = Facility.joins(:activity_facilities => :activity).where("user_id = ?", current_user.id).group("facilities.id").order("facilities asc").limit(50)
-		@recommended = Facility.all
+		@recommended = Facility.where("location_id = ?", current_user.location_id)
+		@recommended = @recommended.shuffle[0,10]
 	end
 
 	def show
@@ -13,7 +14,7 @@ class FacilitiesController < ApplicationController
 		@activityTypes = ActivityTypeFacility.where("facility_id = ?", @facility.id)
 		@similiar = Facility.includes(:activity_type_facilities).where("location_id = ?", @facility.location_id)
     	
-		@activities = Activity.limit(10)
+		@activities = Activity.joins(:activity_facilities).order("beg_date")
 
 		@json = @facility.to_gmaps4rails
 

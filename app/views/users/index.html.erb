@@ -4,9 +4,10 @@
 <div class="row">
 
 
-	<div class="span7">
+	<div class="span8">
 
 		<h3>Find users</h3>	
+		<hr>
 
 		<div class="well">
 
@@ -15,17 +16,14 @@
 				<%= label_tag :name, 'User name' %>
 				<%= text_field_tag :name %>
 				<br><br>
-			
-				<%= label_tag :activity_type_id, 'Favourite activity' %>
-				<%= collection_select(:activity_type_id, nil , ActivityType.all, :id, :name, :prompt => false) %>
-				<br><br>
+
 
 				<%= label_tag :location_id, 'Location' %>
-				<%= collection_select(:location_id, nil , Location.all, :id, :name, :prompt => false) %>
+				<%= collection_select(:location_id, nil , Location.order("name"), :id, :name, :prompt => false) %>
 				<br><br>
 
 				<div>
-					<%= submit_tag '  Search  ', class: "btn btn-large btn-primary" %>
+					<%= submit_tag 'Find users', class: "btn btn-large btn-primary" %>
 				</div>
 			<% end %>
 	
@@ -33,14 +31,20 @@
 
 	</div>
 
-	<aside class="span4 offset1">
+	<aside class="span4">
 
-		<section>
-			<h4>Follow this people:</h4>
-		</section>
+		<div class="well">
+
+			<h4>People close to you:</h4>
+
+			<% @recommended.each do |i| %>
+				<dd>
+					<%= link_to i.name, i %>
+				</dd>
+			<% end %>
+		</div>
 
 	</aside>
-
 
 </div>
 
