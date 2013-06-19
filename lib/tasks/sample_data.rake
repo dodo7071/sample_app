@@ -3,6 +3,8 @@
 namespace :db do
 	desc "Fill database with sample data"
 
+	sleep(30)
+
 	Activity.create([
   { :user_id => 2, :activity_type_id => 2, :beg_date => "2013-07-04", :end_date => "2013-07-04", :beg_time => "2000-01-01 09:00:00", :end_time => "2000-01-01 11:00:00", :note => "test_note", :created_at => "2013-06-17 11:24:19", :updated_at => "2013-06-17 11:24:19", :location_id => 2, :title => "test_activity" },
   { :user_id => 3, :activity_type_id => 2, :beg_date => "2013-07-05", :end_date => "2013-07-05", :beg_time => "2000-01-01 10:00:00", :end_time => "2000-01-01 12:00:00", :note => "test_note", :created_at => "2013-06-17 11:24:19", :updated_at => "2013-06-17 11:24:19", :location_id => 2, :title => "test_activity" },
