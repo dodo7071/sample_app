@@ -1,4 +1,4 @@
-
+<% provide(:title, @user.name + "'s info") %>
 
 <% if @user != current_user %>
 
@@ -117,10 +117,18 @@
 			</aside>
 
 			<div class="span9">
+
+				<div style="float:right;">
+					<%= link_to edit_user_path(current_user), :class => 'btn'  do %>
+						<i class="icon-wrench icon-black"></i> Acount settings
+					<% end %>
+				</div>
+
+				<br><br>
 			
 				<div class="well">
 					<p><b>Name: </b><%= @user.name %></p>
-					<p><b>Age: </b><%= @user.age %></p>
+					<p><b>Birth date: </b><%= @user.birth_date %></p>
 					<p><b>Contact: </b><%= @user.contact %></p>
 					<p><b>Location: </b><%= @user.getLocation %></p>
 				</div>

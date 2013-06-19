@@ -1,6 +1,5 @@
 <% provide(:title, "Find Activity") %>
 
-
 <div class="row">
 	<div class="span8">
 
@@ -31,6 +30,7 @@
 	</div>
 
 	<aside class="span4">
+
 		<section>
 
 			<h4>Try also this activities:</h4>
@@ -44,18 +44,15 @@
 									
 								<%= i.getType %>, <%= i.getLocation %><br>
 								<%= i.beg_date %> (<%= time_ago_in_words(i.beg_date) %>)<br>
-								<%= i.getParticipantCount %> joined people<br>
-								
+								<%= i.getParticipantCount %> joined people<br>	
 
 							</div>
 						</font>
-
 					</a>
 
 				<% end %>	
 
 		</section>
 	</aside>
-
 
 </div>

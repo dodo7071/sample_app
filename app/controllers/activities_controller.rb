@@ -10,7 +10,7 @@ class ActivitiesController < ApplicationController
 	def show
 		@activity= Activity.find(params[:id])
 		@participants = User.joins(:participations).where("activity_id = ?", @activity.id).paginate(page: params[:page])
-    	@activity_comments = ActivityComment.where("activity_id = ?", @activity.id).paginate(page: params[:page])
+    	@activity_comments = ActivityComment.where("activity_id = ?", @activity.id).order("created_at asc").paginate(page: params[:page])
 		@facilities = Facility.joins(:activity_facilities).where("activity_id = ?", @activity.id)
 		@activity_comment = @activity_comments.build
 		@similiar = Activity.where("location_id = ? AND activity_type_id = ?", @activity.location_id, @activity.activity_type_id)
@@ -29,9 +29,6 @@ class ActivitiesController < ApplicationController
 		@recommended = Activity.where("location_id = ?", current_user.location_id)
 		@recommended = @recommended.shuffle[0,6]
 	end
-
-	def addFacility
-	end	
 
 	def join
 		if signed_in?
@@ -54,10 +51,6 @@ class ActivitiesController < ApplicationController
 		@participation.destroy(@participation.first.id)
 		redirect_to :back
 			flash[:success] = "Successfuly canceled!"
-	end
-
-	def getParticipations(activity)
-		@participations = Participation.where("activity_id = ?", activity.id)
 	end
 
 	def edit

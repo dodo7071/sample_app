@@ -16,7 +16,7 @@ SampleApp::Application.routes.draw do
 
 	resources :activities do
 		member do
-			get :addFacility, :removeFacility, :join, :cancel, :comment
+			get :removeFacility, :join, :cancel, :comment
 		end
 	end
 
@@ -44,7 +44,7 @@ SampleApp::Application.routes.draw do
 	match '/find_users', to: 'users#find_users', via: :get	
 
 	match '/create_activity', to: 'activities#new'
-	match '/my_activity', to: 'activities#my'
+	match '/my_activities', to: 'activities#my'
 
 	match '/find_facilities', to: 'facilities#find_facilities', via: :get
 

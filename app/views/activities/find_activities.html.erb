@@ -1,62 +1,58 @@
 <% provide(:title, "Find Activities") %>
   
-
 <div class="row">
 
-		<%= form_tag '/find_activities', method: :get do %>
+	<%= form_tag '/find_activities', method: :get do %>
 
-					<div class="well">
+		<div class="well">
 
-						<div style="width: 100%;">
+			<div style="width: 100%;">
 						
-							<div style="float: left; width: 43%">
-								<%= label_tag :location_id, 'Location' %>
-							</div>
+				<div style="float: left; width: 43%">
+					<%= label_tag :location_id, 'Location' %>
+				</div>
 
+				<div style="float: left; width: 43%">
+					<%= label_tag :activity_type_id, 'Activity type' %>
+				</div>
 
-							<div style="float: left; width: 43%">
-								<%= label_tag :activity_type_id, 'Activity type' %>
-							</div>
-
-						</div>
-						<div style="clear:both"></div>
-
-
-						<div style="width: 100%;">
-						
-							<div style="float: left; width: 43%">
-								<%= collection_select(:location_id, nil , Location.order('name'), :id, :name, {:selected => @location}) %>
-							</div>
-
-
-							<div style="float: left; width: 43%">
-								<%= collection_select(:activity_type_id, nil , ActivityType.all, :id, :name, {:selected => @type}) %>
-							</div>
-					
-							<div style="float: right;">
-								<%= submit_tag '  Search  ', class: "btn btn-large btn-primary" %>
-							</div>
-
-						</div>
-						<div style="clear:both"></div>
-
-					</div>
-
-
-				<% end %>
-
-		<h3>Found activities: </h3>
-
-		<hr>
-
-		<% if @activities.count == 0 %>
-			<div class="well">
-				<big>Sorry, we have no activity for you. You can <%= link_to "create", create_activity_path%> your own activity</big>
 			</div>
-		<% end %>
+			<div style="clear:both"></div>
 
-		<%= will_paginate(@activities) %>		
-			<%= render @activities %>
-		<%= will_paginate(@activities) %>
+
+			<div style="width: 100%;">
+						
+				<div style="float: left; width: 43%">
+					<%= collection_select(:location_id, nil , Location.order('name'), :id, :name, {:selected => @location}) %>
+				</div>
+
+				<div style="float: left; width: 43%">
+					<%= collection_select(:activity_type_id, nil , ActivityType.all, :id, :name, {:selected => @type}) %>
+				</div>
+					
+				<div style="float: right;">
+					<%= submit_tag '  Search  ', class: "btn btn-large btn-primary" %>
+				</div>
+
+			</div>
+			<div style="clear:both"></div>
+
+		</div>
+
+	<% end %>
+
+	<h3>Found activities: </h3>
+
+	<hr>
+
+	<% if @activities.count == 0 %>
+		<div class="well">
+			<big>Sorry, we have no activity for you. You can <%= link_to "create", create_activity_path%> your own activity</big>
+		</div>
+	<% end %>
+
+	<%= will_paginate(@activities) %>		
+		<%= render @activities %>
+	<%= will_paginate(@activities) %>
 
 </div>

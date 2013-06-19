@@ -1,15 +1,15 @@
-<% current_user.getActivities.each do |i| %>
+<% provide(:title, @facility.title) %>
+
+<% @activities.each do |i| %>
 	
 	<hr>				
 
-	<b><%= link_to i.title, i %></b>
-	<%= i.getParticipantCount %> joined people 
-
+	<%= render i %>
 
 	<%= form_for ActivityFacility.new do |f| %>
 		<%= f.hidden_field :activity_id, :value => i.id %>
 		<%= f.hidden_field :facility_id, :value => @facility.id %>
-		<%= f.submit 'Set  ' + @facility.title + '  to this activity' , class: "btn btn-small btn-primary" %>
+		<%= f.submit 'Set ' + @facility.title + ' to this activity' , class: "btn btn-primary" %>
 	<% end %>
 
 <% end %>

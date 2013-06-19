@@ -71,11 +71,6 @@
 
 				<% if current_user?(@activity.user) %>
 
-
-					<%= link_to addFacility_activity_path(@activity.id), :class => 'btn'  do %>
-						<i class="icon-plus"></i> Add facility
-					<% end %>
-
 					<%= link_to edit_activity_path(@activity.id), :class => 'btn'  do %>
 						<i class="icon-pencil"></i> Edit this activity
 					<% end %>
@@ -137,7 +132,7 @@
 		
 		<div class="well">
 
-			<h4>Facilities (<%= @activity.getFacilitiesCount %>)</h4></br>
+			<h4>Added facilities (<%= @activity.getFacilitiesCount %>)</h4></br>
 
 			<% @facilities.each do |i| %>
 				<dd>

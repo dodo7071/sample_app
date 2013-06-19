@@ -1,75 +1,73 @@
-	
 <a href="<%= activity_path(activity) %>">
 
-		<font color="black">
-			<div class="well" style="width:96%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
+	<font color="black">
+		<div class="well" style="width:96%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
 
-				<h4>
-							<%= time_ago_in_words(activity.beg_date) %>
-				</h4>
-				<p>
+			<h4>
+				<%= time_ago_in_words(activity.beg_date) %>
+			</h4>
 
-					<div style="width: 100%;">
-						<div style="float: left; width: 13%">
-							<span class="activity_title">
-								<b>Title:</b> 
-							</span></br>						
+			<p>
+
+				<div style="width: 100%;">
+					<div style="float: left; width: 13%">
+						<span class="activity_title">
+							<b>Title:</b> 
+						</span></br>						
 		
-							<span class="activity_type_id">
-								<b>Type:</b> 
-							</span></br>
+						<span class="activity_type_id">
+							<b>Type:</b> 
+						</span></br>
 
-							<span class="location_id">
-								<b>Location:</b>
-							</span>
-						</div>
-
-						<div style="float: left; width: 37%">
-							
-							<%= activity.title %></br>
-
-							<span class="activity_type_id">
-								<%= activity.getType %>
-							</span></br>
-
-							<span class="location_id">
-								<%= activity.getLocation %>
-							</span>
-						</div>
-
-						<div style="float: left; width: 12%">
-							<span class="joined">
-								<b>Joined:</b>
-							</span></br>
-
-							<span class="beg">
-								<b>Begin:</b>
-							</span></br>
-				
-							<span class="end">
-								<b>End:</b>
-							</span>
-						</div>
-
-						<div style="float: left;">
-							<%= activity.getParticipantCount %> people</br>						
-	
-							<span class="beg">
-								<%= activity.end_date %> at <%= activity.beg_time.strftime('%H:%M') %>
-							</span></br>
-				
-							<span class="end">
-								<%= activity.end_date %> at <%= activity.end_time.strftime('%H:%M') %>
-							</span>
-						</div>
-					
+						<span class="location_id">
+							<b>Location:</b>
+						</span>
 					</div>
-					<div style="clear:both"></div>
 
-				</p>
+					<div style="float: left; width: 37%">
+							
+						<%= activity.title %></br>
 
+						<span class="activity_type_id">
+							<%= activity.getType %>
+						</span></br>
 
-			</div>
-		</font>
+						<span class="location_id">
+							<%= activity.getLocation %>
+						</span>
+					</div>
 
+					<div style="float: left; width: 12%">
+						<span class="joined">
+							<b>Joined:</b>
+						</span></br>
+
+						<span class="beg">
+							<b>Begin:</b>
+						</span></br>
+				
+						<span class="end">
+							<b>End:</b>
+						</span>
+					</div>
+
+					<div style="float: left;">
+						<%= activity.getParticipantCount %> people</br>						
+	
+						<span class="beg">
+							<%= activity.end_date %> at <%= activity.beg_time.strftime('%H:%M') %>
+						</span></br>
+				
+						<span class="end">
+							<%= activity.end_date %> at <%= activity.end_time.strftime('%H:%M') %>
+						</span>
+					</div>
+					
+				</div>
+				<div style="clear:both"></div>
+
+			</p>
+
+		</div>
+	</font>
 </a>

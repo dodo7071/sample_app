@@ -2,7 +2,7 @@
 
 	<div class="btn-group">
 
-		<%= link_to my_activity_path, :class => 'btn'  do %>
+		<%= link_to my_activities_path, :class => 'btn'  do %>
 			<i class="icon-star icon-black"></i> My activities
 		<% end %>
 
@@ -14,7 +14,7 @@
 			<i class="icon-plus icon-black"></i> Create activity
 		<% end %>
 
-		<%= link_to find_activity_path, :class => 'btn'  do %>
+		<%= link_to find_activities_path, :class => 'btn'  do %>
 			<i class="icon-search icon-black"></i> Find activities
 		<% end %>
 
@@ -89,7 +89,7 @@
 			<ol class="posts">
 				<%= render @posts %>
 			</ol>
-
+			<%= will_paginate @posts %>
 
 		</div>
 
@@ -107,7 +107,7 @@
 						<font color="black">
 							<div class="well" style="width:80%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
 
-								<%= time_ago_in_words(i.beg_date) %><br>
+								<%= time_ago_in_words(i.beg_date) %> (<%= i.beg_date %>)<br>
 								<%= i.getParticipantCount %> joined people<br>
 								<%= i.getType %><br>
 								<%= i.getLocation %>
@@ -128,7 +128,6 @@
 
 <% else %>
 
-
 	<div class="row">	
 
 		<%= image_tag("/images/logo.png") %>
@@ -140,11 +139,11 @@
 				<center>
 
 					<%= link_to new_user_path, :class => 'btn btn-large'  do %>
-						<i class="icon-black icon-list-alt"></i> <big>Register now for free</big>
+						<i class="icon-black icon-list-alt"></i> <big>Sign up now for free</big>
 					<% end %>
 
 					<br><br>
-					<big><%= link_to "Why should I register?", new_user_path %></big>
+					<big><%= link_to "Why should I sign up?", new_user_path %></big>
 
 				</center>
 			</div>

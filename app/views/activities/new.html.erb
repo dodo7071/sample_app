@@ -1,6 +1,5 @@
 <% provide(:title, 'Create Activity') %>
 
-
 <div class="row">
 
 	<div class="span10 offset1">
@@ -15,14 +14,8 @@
 
 				<%= render 'shared/error_messages', object: f.object %>
 
-
-
 					<%= f.label 'Activity Title'%>
 					<%= f.text_field :title %>
-
-
-
-		
 
 					<div style="width: 100%;">
 						<div style="float: left; width: 22%">
@@ -49,9 +42,6 @@
 					<div style="clear:both"></div>
 
 
-
-	
-
 					<div style="width: 100%;">
 						<div style="float: left; width: 46%">
 							<%= f.label 'Location' %><%= f.collection_select :location_id, Location.order("name"), :id, :name %>
@@ -64,15 +54,8 @@
 					</div>
 					<div style="clear:both"></div>
 
-		
-
-				
-	
-
 					<%= f.label :activity_note %>
 					<%= f.text_field :note %>
-
-			
 
 				<br><br><%= f.submit "Create Activity", class: "btn btn-large btn-primary" %>
 

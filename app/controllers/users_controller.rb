@@ -19,10 +19,6 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(params[:user])
 		if @user.save
-		@following = Following.new
-		@following.follower_id = @user.id
-		@following.followed_id = @user.id
-		@following.save!
 			flash[:success] = "Welcome to the Activity Finder. Feel free to use it.\n"
 			redirect_to @user
 		else

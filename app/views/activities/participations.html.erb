@@ -1,46 +1,46 @@
 <% provide(:title, 'My participations') %>
 
 <div class="row">
-		<aside class="span4">
-			<section>
+	<aside class="span4">
+		<section>
 
-				<div class="well">
+			<div class="well">
 
-					<h4>Recommended activities:</h4>
+				<h4>Recommended activities:</h4>
 
-					<% @recommended.each do |i| %>
+				<% @recommended.each do |i| %>
 
-						<a href="<%= activity_path(i) %>">
+					<a href="<%= activity_path(i) %>">
 
-							<font color="black">
-								<div class="well" style="width:80%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
+						<font color="black">
+							<div class="well" style="width:80%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
 
-									<%= time_ago_in_words(i.beg_date) %><br>
-									<%= i.getParticipantCount %> joined people<br>
-									<%= i.getType %><br>
-									<%= i.getLocation %>
+								<%= time_ago_in_words(i.beg_date) %> (<%= i.beg_date %>)<br>
+								<%= i.getParticipantCount %> joined people<br>
+								<%= i.getType %><br>
+								<%= i.getLocation %>
 
-								</div>
-							</font>
+							</div>
+						</font>
 
-						</a>
+					</a>
 
-					<% end %>
+				<% end %>
 
-				</div>
-			</section>
-		</aside>
+			</div>
+		</section>
+	</aside>
 
+	<div class="span8">
 
-		<div class="span8">
+		<h3>My participations(<%= @activities.count %>)</h3>
+		<hr>
 
-			<h3>My participations(<%= @activities.count %>)</h3>
+		<%= render @activities %>
 
-			<hr>
+		<%= will_paginate @activities %>
 
-			<%= render @activities %>
-
-		</div>
+	</div>
 
 </div>
 
