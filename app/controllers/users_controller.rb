@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 		@favourites = UserActivity.where("user_id = ?", @user.id)
 		@posts = Post.where("target_id = ?", @user.id).limit(30)
 		@activities = Activity.joins(:participations).where("participations.user_id = ? AND beg_date > ?", @user.id, Date.today.to_date).order("beg_date asc").limit(5)
-		@my_activities = Activity.where("user_id = ? AND beg_date > ?", @user.id, Date.today.to_date).order("beg_date asc")
+		@my_activities = Activity.where("user_id = ? AND beg_date > ?", @user.id, Date.today.to_date).order("beg_date asc").limit(5)
 	end
 
 	def new
