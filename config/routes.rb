@@ -3,7 +3,7 @@ SampleApp::Application.routes.draw do
 
 	resources :users do
 		member do
-			get :following, :followers, :info, :deletefavourite, :follow, :unfollow
+			get :following, :followers, :info, :deletefavourite, :follow, :unfollow, :participations, :activities
 		end
 	end
 
@@ -24,7 +24,7 @@ SampleApp::Application.routes.draw do
 
 	resources :facilities do
     	member do
-     		 get :evaluate, :addToActivity, :set
+     		 get :evaluate, :addToActivity, :set, :activities
 		end
 	end
 

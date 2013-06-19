@@ -1,6 +1,53 @@
-blabla
-<% @users.each do |i| %>
-	<dd>
-		<%= link_to i.name, i %>
-	</dd>
-<% end %>
+<div class="row">
+
+	<div class="well">
+
+		<%= form_tag '/find_users', method: :get do %>
+
+
+			<div style="width: 100%;">
+						
+				<div style="float: left; width: 43%">
+					<%= label_tag :name, 'User name' %>
+				</div>
+
+
+				<div style="float: left; width: 43%">
+					<%= label_tag :location_id, 'Location' %>
+				</div>
+
+			</div>
+			<div style="clear:both"></div>
+
+
+			<div style="width: 100%;">
+						
+				<div style="float: left; width: 43%;">
+					<%= text_field_tag :name, @text%>
+				</div>
+
+
+				<div style="float: left; width: 43%">
+					<%= collection_select(:location_id, nil , Location.order("name"), :id, :name, {:selected => @location}) %>
+				</div>
+					
+				<div style="float: right;">
+					<%= submit_tag 'Find users', class: "btn btn-large btn-primary" %>
+				</div>
+
+			</div>
+			<div style="clear:both"></div>
+
+
+		<% end %>
+
+	</div>
+
+
+	<hr>
+	<h3>Found users:</h3>
+	<hr>
+
+	<%= render @users %>
+
+</div>

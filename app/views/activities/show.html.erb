@@ -24,9 +24,22 @@
 			<h4>Similiar activities:</h4>
 
 			<% @similiar.each do |i| %>
-				<dd>
-					<%= link_to i.title, i %>
-				</dd>
+
+				<a href="<%= activity_path(i) %>">
+
+					<font color="black">
+						<div class="well" style="width:80%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
+
+							<%= i.beg_date %> (<%= time_ago_in_words(i.beg_date) %>)<br>
+							<%= i.getParticipantCount %> joined people<br>
+							<%= i.getType %><br>
+							<%= i.getLocation %>
+
+						</div>
+					</font>
+
+				</a>
+
 			<% end %>
 		</section>
 		

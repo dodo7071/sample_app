@@ -83,7 +83,20 @@ class UsersController < ApplicationController
 	end
 
 	def find_users
-		@users = User.where("location_id = ? OR name ilike ?", params[:location_id], '%' + params[:name] + '%').joins(:user_activities).where("activity_type_id = ?", params[:activity_type_id])
+		@users = User.where("location_id = ? AND name ilike ?", params[:location_id], '%' + params[:name].to_s + '%')
+
+		@location = params[:location_id]
+		@text = params[:name]
+	end
+
+	def participations
+		@user = User.find(params[:id])
+		@participations = Activity.joins(:participations).where("participations.user_id = ? AND beg_date > ?", @user.id, Date.today.to_date).order("beg_date asc")
+	end
+
+	def activities
+		@user = User.find(params[:id])
+		@activities = Activity.where("user_id = ? AND beg_date > ?", @user.id, Date.today.to_date).order("beg_date asc")
 	end
 
 	def destroy

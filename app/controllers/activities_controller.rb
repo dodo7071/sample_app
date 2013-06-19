@@ -14,7 +14,7 @@ class ActivitiesController < ApplicationController
 		@facilities = Facility.joins(:activity_facilities).where("activity_id = ?", @activity.id)
 		@activity_comment = @activity_comments.build
 		@similiar = Activity.where("location_id = ? AND activity_type_id = ?", @activity.location_id, @activity.activity_type_id)
-		@similiar = @similiar.shuffle[0,20]
+		@similiar = @similiar.shuffle[0,5]
 
 	end
 

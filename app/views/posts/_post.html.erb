@@ -4,12 +4,12 @@
 		<% if post.target_id != post.user.id %>
 			> <%= link_to post.getTarget.name, post.getTarget %>
 		<% end %>
-	</span>
+	</span><br>
 	
 	<% if post.content[0] == '#' %>
-		<span class="content">Created <%= link_to post.getActivity.title, post.getActivity %></span>
+		<span class="content">Created <%= link_to post.getActivity.title, post.getActivity %></span><br>
 	<% else %>
-		<span class="content"><%= post.content %></span>
+		<span class="content"><%= post.content %></span><br>
 	<% end %>	
 
 	<span class="timestamp">

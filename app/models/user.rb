@@ -62,9 +62,13 @@ class User < ActiveRecord::Base
 		@loc = Location.find(location_id).name
 	end
 
-	def age(dob)
-  		now = Time.now.utc.to_date
-  		now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+	def age		
+		if birth_date == nil
+			"no value"
+		else
+  			now = Time.now.utc.to_date
+  			now.year - birth_date.year - ((now.month > birth_date.month || (now.month == birth_date.month && now.day >= birth_date.day)) ? 0 : 1)
+		end
 	end
 
 	def getParticipatingActivities

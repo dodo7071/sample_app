@@ -14,10 +14,15 @@ class FacilitiesController < ApplicationController
 		@activityTypes = ActivityTypeFacility.where("facility_id = ?", @facility.id)
 		@similiar = Facility.includes(:activity_type_facilities).where("location_id = ?", @facility.location_id)
     	
-		@activities = Activity.joins(:activity_facilities).order("beg_date")
+		@activities = Activity.joins(:activity_facilities).where("facility_id = ?", @facility.id).order("beg_date").limit(4)
 
 		@json = @facility.to_gmaps4rails
 
+	end
+
+	def activities
+		@facility = Facility.find(params[:id])
+		@activities = Activity.joins(:activity_facilities).where("facility_id = ?", @facility.id).order("beg_date")
 	end
 
 	def evaluate

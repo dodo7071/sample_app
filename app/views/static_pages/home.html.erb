@@ -30,42 +30,44 @@
 			<i class="icon-eye-open icon-black"></i> Who I follow
 		<% end %>
 
+		<br><br>
+
 	</div>
 	
 
-	<br><br>
-
 	<div class="row">
 		<aside class="span3">
+
 			<section>
 				<%= render 'shared/user_info' %>
 			</section>
+
 
 			<section>
 
 				<h4>Created by me:</h4>
 		
-					<% @my_activities.each do |i| %>
+				<% @my_activities.each do |i| %>
 
-						<a href="<%= activity_path(i) %>">
+					<a href="<%= activity_path(i) %>">
+						<font color="black">
+							<div class="well" style="width:80%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
 
-							<font color="black">
-								<div class="well" style="width:80%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
+								<%= i.beg_date %> (<%= time_ago_in_words(i.beg_date) %>)<br>
+								<%= i.getParticipantCount %> joined people<br>
+								<%= i.getType %><br>
+								<%= i.getLocation %>
 
-									<%= i.beg_date %> (<%= time_ago_in_words(i.beg_date) %>)<br>
-									<%= i.getParticipantCount %> joined people<br>
-									<%= i.getType %><br>
-									<%= i.getLocation %>
-
-								</div>
-							</font>
-
-					<% end %>
+							</div>
+						</font>
+				<% end %>
 
 			</section>
 
 
 		</aside>
+
+
 
 		<div class="span6">
 
@@ -89,33 +91,33 @@
 			</ol>
 
 
-			<td class="post">
-
 		</div>
+
 
 		<aside class="span3">
 			
 			<section>
-					<h4>My future participations:</h4>
+					
+				<h4>My future participations:</h4>
 						
-					<% @activities.each do |i| %>
+				<% @activities.each do |i| %>
 
-						<a href="<%= activity_path(i) %>">
+					<a href="<%= activity_path(i) %>">
 
-							<font color="black">
-								<div class="well" style="width:80%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
+						<font color="black">
+							<div class="well" style="width:80%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
 
-									<%= time_ago_in_words(i.beg_date) %><br>
-									<%= i.getParticipantCount %> joined people<br>
-									<%= i.getType %><br>
-									<%= i.getLocation %>
+								<%= time_ago_in_words(i.beg_date) %><br>
+								<%= i.getParticipantCount %> joined people<br>
+								<%= i.getType %><br>
+								<%= i.getLocation %>
 
-								</div>
-							</font>
+							</div>
+						</font>
 
-						</a>
+					</a>
 
-					<% end %>
+				<% end %>
 						
 			</section>
 
@@ -123,7 +125,9 @@
 
   	</div>
 
+
 <% else %>
+
 
 	<div class="row">	
 
@@ -135,8 +139,8 @@
 			<div class="well">
 				<center>
 
-					<%= link_to new_user_path, :class => 'btn btn-primary btn-large'  do %>
-						<i class="icon-white icon-list-alt"></i> <big><b>Register now for free</b></big>
+					<%= link_to new_user_path, :class => 'btn btn-large'  do %>
+						<i class="icon-black icon-list-alt"></i> <big>Register now for free</big>
 					<% end %>
 
 					<br><br>
@@ -150,116 +154,117 @@
 
 				<h4>About Activity finder:</h4>
 
-				Activity finder is the web page which helps people to find sport activities according their interest and choosen location. It includes many sport facilities which can be evaluated and add to activities...</p>
+				Activity finder is the web page which helps people to find sport activities according their interest and choosen location. It includes many sport facilities which can be evaluated and add to activities...
 					
-
 				Look <%= link_to "there", about_path %> for more information.
+
 			</div>
 
 		</aside>
 
+
+		<div class="span8">
+
+
 			<div style="float: right;">
-				<%= link_to about_path, :class => 'btn btn-primary btn-medium'  do %>
-					<i class="icon-white icon-question-sign"></i> <big><b>What is Activity Finder? </b></big>
+				<%= link_to about_path, :class => 'btn btn-medium'  do %>
+					<i class="icon-black icon-question-sign"></i> <big>What is Activity Finder?</big>
 				<% end %>
 			</div>
-
-			<div class="span8">
-
+			<br>
 				
-				<h3>Find sport activity</h3>
+
+			<h3>Find sport activity</h3>
 				
-				<%= form_tag '/find_activities', method: :get do %>
+			<%= form_tag '/find_activities', method: :get do %>
 
-					<div class="well">
+				<div class="well">
 
-						<div style="width: 100%;">
+					<div style="width: 100%;">
 						
-							<div style="float: left; width: 39%">
-								<%= label_tag :location_id, 'Location' %>
-							</div>
-
-
-							<div style="float: left; width: 39%">
-								<%= label_tag :activity_type_id, 'Activity type' %>
-							</div>
-
+						<div style="float: left; width: 39%">
+							<%= label_tag :location_id, 'Location' %>
 						</div>
-						<div style="clear:both"></div>
 
 
-						<div style="width: 100%;">
-						
-							<div style="float: left; width: 39%">
-								<%= collection_select(:location_id, nil , Location.order('name'), :id, :name) %>
-							</div>
-
-
-							<div style="float: left; width: 39%">
-								<%= collection_select(:activity_type_id, nil , ActivityType.all, :id, :name,) %>
-							</div>
-					
-							<div style="float: right;">
-								<%= submit_tag 'Find activity', class: "btn btn-large btn-primary" %>
-							</div>
-
+						<div style="float: left; width: 39%">
+							<%= label_tag :activity_type_id, 'Activity type' %>
 						</div>
-						<div style="clear:both"></div>
 
 					</div>
+					<div style="clear:both"></div>
 
 
-				<% end %>
-
-				<hr>
-
-
-				<h3>Find sport facility</h3>
-
-
-				<%= form_tag '/find_facilities', method: :get do %>
-
-					<div class="well">
-
-
-						<div style="width: 100%;">
+					<div style="width: 100%;">
 						
-							<div style="float: left; width: 39%">
-								<%= label_tag :location_id, 'Location' %>
-							</div>
-
-
-							<div style="float: left; width: 39%">
-								<%= label_tag :activity_type_id, 'Activity type' %>
-							</div>
-
+						<div style="float: left; width: 39%">
+							<%= collection_select(:location_id, nil , Location.order('name'), :id, :name) %>
 						</div>
-						<div style="clear:both"></div>
 
 
-						<div style="width: 100%;">
-						
-							<div style="float: left; width: 39%">
-								<%= collection_select(:location_id, nil , Location.order('name'), :id, :name) %>
-							</div>
-
-							<div style="float: left; width: 39%">
-								<%= collection_select(:activity_type_id, nil , ActivityType.all, :id, :name,) %>
-							</div>
+						<div style="float: left; width: 39%">
+							<%= collection_select(:activity_type_id, nil , ActivityType.all, :id, :name,) %>
+						</div>
 					
-							<div style="float: right;">
-								<%= submit_tag 'Find facility', class: "btn btn-large btn-primary" %>
-							</div>
-
+						<div style="float: right;">
+							<%= submit_tag 'Find activity', class: "btn btn-large btn-primary" %>
 						</div>
-						<div style="clear:both"></div>
 
 					</div>
+					<div style="clear:both"></div>
+
+				</div>
 
 
-				<% end %>
+			<% end %>
 
-			</div>
+			<hr>
+
+
+			<h3>Find sport facility</h3>
+
+			<%= form_tag '/find_facilities', method: :get do %>
+
+				<div class="well">
+
+					<div style="width: 100%;">
+						
+						<div style="float: left; width: 39%">
+							<%= label_tag :location_id, 'Location' %>
+						</div>
+
+
+						<div style="float: left; width: 39%">
+							<%= label_tag :activity_type_id, 'Activity type' %>
+						</div>
+
+					</div>
+					<div style="clear:both"></div>
+
+
+					<div style="width: 100%;">
+						
+						<div style="float: left; width: 39%">
+							<%= collection_select(:location_id, nil , Location.order('name'), :id, :name) %>
+						</div>
+
+						<div style="float: left; width: 39%">
+							<%= collection_select(:activity_type_id, nil , ActivityType.all, :id, :name,) %>
+						</div>
+					
+						<div style="float: right;">
+							<%= submit_tag 'Find facility', class: "btn btn-large btn-primary" %>
+						</div>
+
+					</div>
+					<div style="clear:both"></div>
+
+				</div>
+
+
+			<% end %>
+
+		</div>
 
   	</div>
 	

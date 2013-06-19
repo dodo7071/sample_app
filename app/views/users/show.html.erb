@@ -12,6 +12,14 @@
 		</li>
 
 		<li>
+			<a href="<%= @user.id %>/activities">Created activities</a>
+		</li>
+
+		<li>
+			<a href="<%= @user.id %>/participations">Participations</a>
+		</li>
+
+		<li>
 			<a href="<%= @user.id %>/following">Following(<%= @user.getFollowedCount %>)</a>
 		</li>
 
@@ -34,7 +42,7 @@
 
 				<section>
 					<p>
-						Activities:
+						<h4>Created activities:</h4>
 		
 						<% @my_activities.each do |i| %>
 
@@ -43,7 +51,7 @@
 								<font color="black">
 									<div class="well" style="width:80%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
 
-										<%= time_ago_in_words(i.beg_date) %><br>
+										<%= i.beg_date %> (<%= time_ago_in_words(i.beg_date) %>)<br>
 										<%= i.getParticipantCount %> joined people<br>
 										<%= i.getType %><br>
 										<%= i.getLocation %>
@@ -132,12 +140,25 @@
 
 				<section>
 					<p>
-						Will participate:
+						<h4>Will participate:</h4>
 						
 						<% @activities.each do |i| %>
-							<dd>
-								<%= link_to i.title, i %>
-							</dd>
+
+							<a href="<%= activity_path(i) %>">
+
+								<font color="black">
+									<div class="well" style="width:80%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
+
+										<%= i.beg_date %> (<%= time_ago_in_words(i.beg_date) %>)<br>
+										<%= i.getParticipantCount %> joined people<br>
+										<%= i.getType %><br>
+										<%= i.getLocation %>
+
+									</div>
+								</font>
+
+							</a>
+
 						<% end %>
 						
 		  			</p>
@@ -180,20 +201,34 @@
 					</a>
 				</section>
 
-				<section>
-					<div class="well">
-						Favourite activities:
-		
-						<% @user.myActivities.each do |i| %>
-							<dd>
-								<%= @user.getType(i.activity_type_id).name %><button class="close">&times;</button>
-							</dd>
-						<% end %>
 
-						<br><%= link_to "Add favourite activity", info_user_path, :method => "get" %>
-		 			 </div>
-					<hr>
+				<section>
+
+					<p>
+						<h4>My activities:</h4>
+		
+						<% @user.getActivities.each do |i| %>
+
+						<a href="<%= activity_path(i) %>">
+
+							<font color="black">
+								<div class="well" style="width:80%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
+
+									<%= time_ago_in_words(i.beg_date) %><br>
+									<%= i.getParticipantCount %> joined people<br>
+									<%= i.getType %><br>
+									<%= i.getLocation %>
+
+								</div>
+							</font>
+
+						</a>
+
+					<% end %>
+
+		  			</p>
 				</section>
+				
 
 			</aside>
 
@@ -238,28 +273,30 @@
 			<aside class="span3">
 				<section>
 					<p>
-						My participations:
+						<h4>My participations:</h4>
 						
 						<% @activities.each do |i| %>
-							<dd>
-								<%= link_to i.title, i %>
-							</dd>
-						<% end %>
+
+						<a href="<%= activity_path(i) %>">
+
+							<font color="black">
+								<div class="well" style="width:80%;background:#00FFFF" onmouseover="this.style.background='#87CEFA';" onmouseout="this.style.background='#00FFFF';">
+
+									<%= time_ago_in_words(i.beg_date) %><br>
+									<%= i.getParticipantCount %> joined people<br>
+									<%= i.getType %><br>
+									<%= i.getLocation %>
+
+								</div>
+							</font>
+
+						</a>
+
+					<% end %>
 						
 		  			</p>
 				</section>				
 
-				<section>
-					<p>
-						My activities:
-		
-						<% @user.getActivities.each do |i| %>
-							<dd>
-								<%= link_to i.title, i %>
-							</dd>
-						<% end %>
-		  			</p>
-				</section>
 			</aside>
 
 	  	</div>	

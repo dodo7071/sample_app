@@ -1,0 +1,35 @@
+<% if signed_in? %>
+
+	<ul class="nav nav-tabs">
+
+		<li>
+			<a href="../<%= @user.id %>">General</a>
+		</li>
+
+		<li>
+			<a href="../<%= @user.id %>/info">Profile Info</a>
+		</li>
+
+		<li class="active">
+			<a href="../<%= @user.id %>/activities">Created activities</a>
+		</li>
+
+		<li>
+			<a href="../<%= @user.id %>/participations">Participations</a>
+		</li>
+
+		<li>
+			<a href="../<%= @user.id %>/following">Following(<%= @user.getFollowedCount %>)</a>
+		</li>
+
+		<li>
+			<a href="../<%= @user.id %>/followers">Followers(<%= @user.getFollowersCount %>)</a>
+		</li>
+
+	</ul>
+
+	<div class="row">
+		<%= render @activities %>
+	</div>	
+
+<% end %>

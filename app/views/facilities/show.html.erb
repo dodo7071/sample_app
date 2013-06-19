@@ -49,21 +49,18 @@
 
 	<div class="span9">
 
-		<div style="width: 100%;">
-			<div style="float:left; width: 75%">
-				<span class="title">
-					<h3><%= link_to @facility.title, @facility %></h3>
-				</span>
-			</div>
-			<div style="float:right;">
 
-				<%= link_to addToActivity_facility_path(@facility), :class => 'btn'  do %>
-					<i class="icon-plus icon-black"></i> Add to my activity
-				<% end %>
+		<h3><%= link_to @facility.title, @facility %></h3>
+		<hr>
 
-			</div>
-		</div>
-		<div style="clear:both"></div>
+		<%= link_to activities_facility_path(@facility), :class => 'btn'  do %>
+			<i class="icon-star icon-black"></i> Show all activities of this facility
+		<% end %>
+
+		<%= link_to addToActivity_facility_path(@facility), :class => 'btn'  do %>
+			<i class="icon-plus icon-black"></i> Add to my activity
+		<% end %>
+		<br><br>
 
 		<div class="well">
 

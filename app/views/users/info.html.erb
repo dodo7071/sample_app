@@ -12,6 +12,14 @@
 		</li>
 
 		<li>
+			<a href="../<%= @user.id %>/activities">Created activities</a>
+		</li>
+
+		<li>
+			<a href="../<%= @user.id %>/participations">Participations</a>
+		</li>
+
+		<li>
 			<a href="../<%= @user.id %>/following">Following(<%= @user.getFollowedCount %>)</a>
 		</li>
 
@@ -50,7 +58,7 @@
 
 				<div class="well">
 					<p><b>Name: </b><%= @user.name %></p>
-					<p><b>Age: </b><%= @user.age(@user.birth_date) if @user.birth_date != nil %></p>
+					<p><b>Age: </b><%= @user.age %></p>
 					<p><b>Contact: </b><%= @user.contact %></p>
 					<p><b>Location: </b><%= @user.getLocation %></p>
 				</div>
@@ -112,7 +120,7 @@
 			
 				<div class="well">
 					<p><b>Name: </b><%= @user.name %></p>
-					<p><b>Age: </b><%= @user.age(@user.birth_date) if @user.birth_date != nil %></p>
+					<p><b>Age: </b><%= @user.age %></p>
 					<p><b>Contact: </b><%= @user.contact %></p>
 					<p><b>Location: </b><%= @user.getLocation %></p>
 				</div>
